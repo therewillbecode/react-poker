@@ -27,13 +27,14 @@ class Deck extends Component {
 
     return (
       <div>
-      {R.range(8, 11).map(i => 
+      {R.range(0, 65).map(i => 
         <Card
           index={i}
           faceDown={false}
           doubleBacked={false}
-          size={100}
+          size={60}
           style={style}
+          className='card'
         />
       )}
       </div>

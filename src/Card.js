@@ -15,6 +15,7 @@ function convertSuit (suit) {
 }
 
 function convertRank (rank) {
+  if(rank === 1) return 'A'
   if (rank < 11) return rank 
 
   switch(rank){
@@ -24,8 +25,6 @@ function convertRank (rank) {
       return 'Q'
     case 13:
       return 'K'
-    case 14:
-      return 'A'
   }
 }
 
