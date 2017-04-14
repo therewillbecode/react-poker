@@ -4,7 +4,7 @@ import './Deck.css'
 import Card from './Card'
 
 function generateDeck () {
-    R.range(1, 52)
+  R.range(1, 52)
 }
 
 function DrawCards () {
@@ -20,13 +20,14 @@ class Deck extends Component {
   render() {
 
     return (
-      <Card reversed={false}/>
+      <Card index={11} faceDown={false} doubleBacked={false} size={100} />
     )
   }
 }
 
 Deck.propTypes = {
-
+  // faceDown bool
+  // doubleBacked  bool
 }
 
 export default Deck
