@@ -1,6 +1,33 @@
 import React, { Component } from 'react'
 import './Card.css'
 
+function convertSuit (suit) {
+  switch(suit){
+    case 1:
+      return 'h'
+    case 2:
+      return 'd'
+    case 3:
+      return 's'
+    case 4:
+      return 'c'
+  }
+}
+
+function convertRank (rank) {
+  if (rank < 11) return rank 
+
+  switch(rank){
+    case 11:
+      return 'J'
+    case 12:
+      return 'Q'
+    case 13:
+      return 'K'
+    case 14:
+      return 'A'
+  }
+}
 
 const getSuit = i => i / 13 | 0
 
