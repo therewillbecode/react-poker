@@ -34,7 +34,6 @@ class Deck extends Component {
           doubleBacked={false}
           size={60}
           style={style}
-          className='card'
         />
       )}
       </div>
