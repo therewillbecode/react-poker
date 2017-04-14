@@ -7,7 +7,9 @@ function generateDeck () {
     R.range(1, 52)
 }
 
-function DrawCards
+function DrawCards () {
+
+}
 
 class Deck extends Component {
   constructor(props){
