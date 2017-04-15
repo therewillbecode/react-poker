@@ -11,12 +11,23 @@ function DrawCards () {
 
 }
 
+const m = i => ({ 
+  x: i * 1,
+  y: i * 10,
+  Z : 0
+})
+
+// deck takes a mapXYZ prop which is a func that maps a card index to X, Y, Z
+// few built in such as fan, spread, sort etc
 
 class Deck extends Component {
   constructor(props){
     super(props)
   }
+  
+  spread (index){
 
+  }
 
   render() {
    const cardSpacing = 22
@@ -28,7 +39,8 @@ class Deck extends Component {
           index={i}
           faceDown={false}
           doubleBacked={false}
-          size={60}
+          size={120}
+          mapXYZ={m}
         />
       )}
       </div>
@@ -39,6 +51,13 @@ class Deck extends Component {
 Deck.propTypes = {
   // faceDown bool
   // doubleBacked  bool
+  
+  ////positioning props - 
+  // stacked
+  // fan
+  // by suit
+  // sort
+  // transform is a function that maps position of cards based on index
 }
 
 export default Deck

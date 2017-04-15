@@ -37,31 +37,38 @@ const getAttributes = i => ({
   rank: getRank(i)
 })
 
-const getStyle = (x, y) => ({
-  translateX: `${x}`,
-  translateY: `${y}`,
-  position: 'absolute',
-})
-
-const Card = props => {
-  const { index, faceDown, doubleBacked, size, x, y } = props
-
-  if(doubleBacked){
-    return (
-     <img src={window.Poker.getBackData(size)} />
-    )
-  }
-  
+const getSrc = (index, size) => {
   const attributes = getAttributes(index)
   let { suit, rank } = attributes
   rank = convertRank(rank)
   suit = convertSuit(suit)
   
-  const style = getStyle(x, y)
+  return window.Poker.getCardData(size, suit, rank)
+}
+
+const getStyle = mapXYZ => i => {
+  const { x , y, z} = mapXYZ(i)
+  return {
+    WebkitTransform: `translate3d(${x}px, ${y}px, 0)`,
+    transform: `translate3d(${x}px, ${y}px, 0)`,
+    position: 'absolute'
+  }
+}
+
+const Card = props => {
+  const { index, faceDown, doubleBacked, mapXYZ, size} = props
+  let src = null
+  if(doubleBacked){
+    src = window.Poker.getBackData(size)
+  } else {
+    src = getSrc(index, size)
+  }
+  
+  const style = getStyle(mapXYZ)(index)
   
   return (
       <img
-        src={window.Poker.getCardData(size, suit, rank)}
+        src={src}
         style={style}
       />
   )
