@@ -28,6 +28,8 @@ const stack = i => ({
   z : i
 })
 
+// have one function that uses 3d flips to drop cards onto surface
+
 // deck takes a mapXYZ prop which is a func that maps a card index to X, Y, Z
 
 // few built in such as fan, spread, sort etc
@@ -57,7 +59,7 @@ class Deck extends Component {
           faceDown={false}
           doubleBacked={false}
           size={100}
-          mapXYZ={spread}
+          mapXYZ={fan}
         />
       )}
       </div>
