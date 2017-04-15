@@ -12,8 +12,8 @@ function DrawCards () {
 }
 
 const spreadShuffle = i => ({ 
-  x: Math.cos(i) * Math.floor((Math.random() * 200) + 1),
-  y: Math.sin(i) * Math.floor((Math.random() * 200) + 1), 
+  x: Math.cos(i) * Math.floor((Math.random() * 100) + 1),
+  y: Math.sin(i) * Math.floor((Math.random() * 100) + 1), 
   Z : 0
 })
 
@@ -24,6 +24,11 @@ const fan = i => ({
   z : i
 })
 
+const stack = i => ({
+  x: 0.1 * i,
+  y: 0.1 * i, 
+  z : i
+})
 
 
 // deck takes a mapXYZ prop which is a func that maps a card index to X, Y, Z
@@ -35,11 +40,7 @@ class Deck extends Component {
     super(props)
   }
 
-  componentDidMount(){
-    setTimeout(() => {
 
-    }, 800)
-  }
   
   spread (index){
 
@@ -56,7 +57,7 @@ class Deck extends Component {
           faceDown={false}
           doubleBacked={false}
           size={60}
-          mapXYZ={fan}
+          mapXYZ={spreadShuffle}
         />
       )}
       </div>

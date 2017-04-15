@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { Motion, spring } from 'react-motion'
+import R from 'rambda'
+
 
 import './Card.css'
 
@@ -74,6 +76,9 @@ const defaultMapXYZ = i => ({
 
 const Card = props => {
   const { index, faceDown, doubleBacked, mapXYZ, size} = props
+  const defaultSize = 60 // px size of cards preset animation funcs based on
+  const scale = size / defaultSize
+
   let src = null
   if(doubleBacked){
     src = window.Poker.getBackData(size)
@@ -81,12 +86,14 @@ const Card = props => {
     src = getSrc(index, size)
   }
   
-  const defaultStyle = getStyle(index*3, index*3) // initial coords
-  const { x, y } = mapXYZ(index) // coords to interpolate to
-  const sprungRange = getSprings(x, y)
+  const defaultStyle = getStyle(index * 3, index * 2) // initial coords
+  const { x , y } = mapXYZ(index) // coords to interpolate to
+  const scaledX = x * scale  // scale coords for card size
+  const scaledY = y * scale
+  const sprungRange = getSprings(scaledX, scaledY)
 
   return (
-    <Motion defaultStyle={{x: 1800, y:1800}} style={sprungRange}>
+    <Motion defaultStyle={{x: 1800, y:1000}} style={sprungRange}>
       {({x, y}) => // interpolated x, y values
         <img
           src={src}
