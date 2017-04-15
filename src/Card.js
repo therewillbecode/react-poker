@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { Motion, spring } from 'react-motion'
+
 import './Card.css'
 
 function convertSuit (suit) {
@@ -46,14 +48,29 @@ const getSrc = (index, size) => {
   return window.Poker.getCardData(size, suit, rank)
 }
 
-const getStyle = mapXYZ => i => {
-  const { x , y, z} = mapXYZ(i)
-  return {
-    WebkitTransform: `translate3d(${x}px, ${y}px, 0)`,
-    transform: `translate3d(${x}px, ${y}px, 0)`,
-    position: 'absolute'
-  }
+
+const getStyle = (x, y) => ({
+  WebkitTransform: `translate3d(${x}px, ${y}px, 0)`,
+  transform: `translate3d(${x}px, ${y}px, 0)`,
+  position: 'absolute'
+})
+
+const springConfig = { 
+  stiffness: 170,
+  damping: 26
 }
+
+const getSprings = (x, y) => ({
+  x: spring(x, springConfig),
+  y: spring(y, springConfig)
+})
+
+
+const defaultMapXYZ = i => ({ 
+  x: i * 4,
+  y: i * 4, 
+  z : i
+})
 
 const Card = props => {
   const { index, faceDown, doubleBacked, mapXYZ, size} = props
@@ -64,13 +81,19 @@ const Card = props => {
     src = getSrc(index, size)
   }
   
-  const style = getStyle(mapXYZ)(index)
-  
+  const defaultStyle = getStyle(index*3, index*3) // starting coords
+  const { x, y } = mapXYZ(index) // coords to interpolate to
+  const sprungRange = getSprings(x, y)
+
   return (
-      <img
-        src={src}
-        style={style}
-      />
+    <Motion defaultStyle={{x: 1800, y:1800}} style={sprungRange}>
+      {({x, y}) => // interpolated x, y values
+        <img
+          src={src}
+          style={getStyle(x, y)}
+        />
+      }
+    </Motion> 
   )
 } 
 
