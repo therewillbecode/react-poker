@@ -3,17 +3,10 @@ import R from 'rambda'
 import './Deck.css'
 import Card from './Card'
 
-function generateDeck () {
-  R.range(1, 52)
-}
-
-function DrawCards () {
-
-}
 
 const spreadShuffle = i => ({ 
-  x: Math.cos(i) * Math.floor((Math.random() * 100) + 1),
-  y: Math.sin(i) * Math.floor((Math.random() * 100) + 1), 
+  x: Math.cos(i) * Math.floor((Math.random() * 200) + 1),
+  y: Math.sin(i) * Math.floor((Math.random() * 200) + 1), 
   Z : 0
 })
 
@@ -30,7 +23,6 @@ const stack = i => ({
   z : i
 })
 
-
 // deck takes a mapXYZ prop which is a func that maps a card index to X, Y, Z
 
 // few built in such as fan, spread, sort etc
@@ -38,9 +30,12 @@ const stack = i => ({
 class Deck extends Component {
   constructor(props){
     super(props)
+    this.state = {time: 0}
   }
 
-
+  componentDidMount(){
+    setInterval(() => this.setState({ time: Date.now()}), 200)
+  }
   
   spread (index){
 

@@ -2,11 +2,10 @@ import React, { Component } from 'react'
 import { Motion, spring } from 'react-motion'
 import R from 'rambda'
 
-
 import './Card.css'
 
 function convertSuit (suit) {
-  switch(suit){
+  switch (suit) {
     case 1:
       return 'h'
     case 2:
@@ -19,10 +18,10 @@ function convertSuit (suit) {
 }
 
 function convertRank (rank) {
-  if(rank === 1) return 'A'
-  if (rank < 11) return rank 
+  if (rank === 1) return 'A'
+  if (rank < 11) return rank
 
-  switch(rank){
+  switch (rank) {
     case 11:
       return 'J'
     case 12:
@@ -46,10 +45,9 @@ const getSrc = (index, size) => {
   let { suit, rank } = attributes
   rank = convertRank(rank)
   suit = convertSuit(suit)
-  
+
   return window.Poker.getCardData(size, suit, rank)
 }
-
 
 const getStyle = (x, y) => ({
   WebkitTransform: `translate3d(${x}px, ${y}px, 0)`,
@@ -57,9 +55,9 @@ const getStyle = (x, y) => ({
   position: 'absolute'
 })
 
-const springConfig = { 
+const springConfig = {
   stiffness: 170,
-  damping: 26
+  damping: 27
 }
 
 const getSprings = (x, y) => ({
@@ -67,11 +65,10 @@ const getSprings = (x, y) => ({
   y: spring(y, springConfig)
 })
 
-
-const defaultMapXYZ = i => ({ 
+const defaultMapXYZ = i => ({
   x: i * 4,
-  y: i * 4, 
-  z : i
+  y: i * 4,
+  z: i
 })
 
 const Card = props => {
@@ -80,28 +77,28 @@ const Card = props => {
   const scale = size / defaultSize
 
   let src = null
-  if(doubleBacked){
+  if (doubleBacked) {
     src = window.Poker.getBackData(size)
   } else {
     src = getSrc(index, size)
   }
-  
+
   const defaultStyle = getStyle(index * 3, index * 2) // initial coords
-  const { x , y } = mapXYZ(index) // coords to interpolate to
+  const { x, y } = mapXYZ(index) // coords to interpolate to
   const scaledX = x * scale  // scale coords for card size
   const scaledY = y * scale
   const sprungRange = getSprings(scaledX, scaledY)
 
   return (
-    <Motion defaultStyle={{x: 1800, y:1000}} style={sprungRange}>
+    <Motion defaultStyle={{x: 1800, y: 1000}} style={sprungRange}>
       {({x, y}) => // interpolated x, y values
         <img
           src={src}
           style={getStyle(x, y)}
         />
       }
-    </Motion> 
+    </Motion>
   )
-} 
+}
 
 export default Card
