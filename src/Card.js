@@ -37,16 +37,14 @@ const getAttributes = i => ({
   rank: getRank(i)
 })
 
-const cardSpacing = '0.1em'
-
-const style = {
-   translateX: `${cardSpacing}`,
-   position: 'relative',
-   padding: '0.1em'
-}
+const getStyle = (x, y) => ({
+  translateX: `${x}`,
+  translateY: `${y}`,
+  position: 'absolute',
+})
 
 const Card = props => {
-  const { index, faceDown, doubleBacked, size } = props
+  const { index, faceDown, doubleBacked, size, x, y } = props
 
   if(doubleBacked){
     return (
@@ -58,6 +56,8 @@ const Card = props => {
   let { suit, rank } = attributes
   rank = convertRank(rank)
   suit = convertSuit(suit)
+  
+  const style = getStyle(x, y)
   
   return (
       <img
