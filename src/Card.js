@@ -75,10 +75,11 @@ const Card = props => {
   const { index, faceDown, doubleBacked, mapXYZ, size} = props
   const defaultSize = 60 // px size of cards preset animation funcs based on
   const scale = size / defaultSize
+  const backSrc = window.Poker.getBackData(size)
 
   let src = null
   if (doubleBacked) {
-    src = window.Poker.getBackData(size)
+    src = backSrc
   } else {
     src = getSrc(index, size)
   }
@@ -92,11 +93,19 @@ const Card = props => {
   return (
     <Motion defaultStyle={{x: 1800, y: 1000}} style={sprungRange}>
       {({x, y}) => // interpolated x, y values
+       <div>
         <img
+          className='front'
           src={src}
           style={getStyle(x, y, index)}
         />
-      }
+        <img 
+          className='back'
+          src={src}
+          style={getStyle(x, y, index)}
+       />
+      </div>
+     }
     </Motion>
   )
 }
