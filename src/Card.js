@@ -37,6 +37,14 @@ const getAttributes = i => ({
   rank: getRank(i)
 })
 
+const cardSpacing = '0.1em'
+
+const style = {
+   translateX: `${cardSpacing}`,
+   position: 'relative',
+   padding: '0.1em'
+}
+
 const Card = props => {
   const { index, faceDown, doubleBacked, size } = props
 
@@ -50,8 +58,13 @@ const Card = props => {
   let { suit, rank } = attributes
   rank = convertRank(rank)
   suit = convertSuit(suit)
-
-  return <img src={window.Poker.getCardData(size, suit, rank)} />
+  
+  return (
+      <img
+        src={window.Poker.getCardData(size, suit, rank)}
+        style={style}
+      />
+  )
 } 
 
 export default Card

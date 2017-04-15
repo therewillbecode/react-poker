@@ -12,7 +12,6 @@ function DrawCards () {
 }
 
 
-
 class Deck extends Component {
   constructor(props){
     super(props)
@@ -22,18 +21,14 @@ class Deck extends Component {
   render() {
    const cardSpacing = 22
 
-    const style = { transform: `translateX(${cardSpacing})` }
-
-
     return (
       <div>
-      {R.range(0, 65).map(i => 
+      {R.range(13, 65).map(i => 
         <Card
           index={i}
           faceDown={false}
           doubleBacked={false}
           size={60}
-          style={style}
         />
       )}
       </div>
