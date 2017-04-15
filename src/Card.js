@@ -56,8 +56,8 @@ const getStyle = (x, y) => ({
 })
 
 const springConfig = { 
-  stiffness: 170,
-  damping: 26
+  stiffness: 250,
+  damping: 5
 }
 
 const getSprings = (x, y) => ({

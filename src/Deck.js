@@ -25,7 +25,6 @@ const fan = i => ({
 })
 
 
-
 // deck takes a mapXYZ prop which is a func that maps a card index to X, Y, Z
 
 // few built in such as fan, spread, sort etc
@@ -33,12 +32,11 @@ const fan = i => ({
 class Deck extends Component {
   constructor(props){
     super(props)
+    this.state = {time: 0}
   }
 
   componentDidMount(){
-    setTimeout(() => {
-
-    }, 800)
+    setInterval(() => this.setState({ time: Date.now()}), 400)
   }
   
   spread (index){
@@ -56,7 +54,7 @@ class Deck extends Component {
           faceDown={false}
           doubleBacked={false}
           size={60}
-          mapXYZ={fan}
+          mapXYZ={spreadShuffle}
         />
       )}
       </div>
