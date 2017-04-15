@@ -51,8 +51,8 @@ const getSrc = (index, size) => {
 
 const getStyle = (x, y) => ({
   WebkitTransform: `translate3d(${x}px, ${y}px, 0)`,
-  transform: `translate3d(${x}px, ${y}px, 0)`,
-  position: 'absolute'
+  transform: `translate3d(${x}px, ${y}px, 0) rotate(${0}deg)`,
+  position: 'absolute',
 })
 
 const springConfig = {
@@ -94,7 +94,7 @@ const Card = props => {
       {({x, y}) => // interpolated x, y values
         <img
           src={src}
-          style={getStyle(x, y)}
+          style={getStyle(x, y, index)}
         />
       }
     </Motion>

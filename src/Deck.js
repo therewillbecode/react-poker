@@ -7,9 +7,14 @@ import Card from './Card'
 const spreadShuffle = i => ({ 
   x: Math.cos(i) * Math.floor((Math.random() * 200) + 1),
   y: Math.sin(i) * Math.floor((Math.random() * 200) + 1), 
-  Z : 0
+  z : 0
 })
 
+const spread = i => ({ 
+  x: (i * 12.2) -500,
+  y: 50, 
+  z : 0
+})
 
 const fan = i => ({ 
   x: Math.cos(i) * 95,
@@ -34,7 +39,7 @@ class Deck extends Component {
   }
 
   componentDidMount(){
-    setInterval(() => this.setState({ time: Date.now()}), 200)
+    setInterval(() => this.setState({ time: Date.now()}), 300)
   }
   
   spread (index){
@@ -51,8 +56,8 @@ class Deck extends Component {
           index={i}
           faceDown={false}
           doubleBacked={false}
-          size={60}
-          mapXYZ={spreadShuffle}
+          size={100}
+          mapXYZ={spread}
         />
       )}
       </div>
