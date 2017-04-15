@@ -81,7 +81,7 @@ const Card = props => {
     src = getSrc(index, size)
   }
   
-  const defaultStyle = getStyle(index*3, index*3) // starting coords
+  const defaultStyle = getStyle(index*3, index*3) // initial coords
   const { x, y } = mapXYZ(index) // coords to interpolate to
   const sprungRange = getSprings(x, y)
 
