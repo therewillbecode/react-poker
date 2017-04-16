@@ -53,7 +53,6 @@ const getStyle = (x, y) => ({
   WebkitTransform: `translate3d(${x}px, ${y}px, 0)`,
   transform: `translate3d(${x}px, ${y}px, 0) rotateY(${0}deg) rotate(${0}deg)`,
   position: 'absolute',
-  perspective: '100px'  // used for 3d transforms
 })
 
 const springConfig = {
