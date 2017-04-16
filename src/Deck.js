@@ -11,7 +11,7 @@ const spreadShuffle = i => ({
 })
 
 const spread = i => ({ 
-  x: (i * 12) -500,
+  x: (i * 12) - 100,
   y: 50, 
   z : 0
 })
