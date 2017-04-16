@@ -53,6 +53,7 @@ const getStyle = (x, y) => ({
   WebkitTransform: `translate3d(${x}px, ${y}px, 0)`,
   transform: `translate3d(${x}px, ${y}px, 0) rotateY(${0}deg) rotate(${0}deg)`,
   position: 'absolute',
+  perspective: '100px'  // used for 3d transforms
 })
 
 const springConfig = {
@@ -90,19 +91,23 @@ const Card = props => {
   const scaledY = y * scale
   const sprungRange = getSprings(scaledX, scaledY)
 
+
   return (
     <Motion defaultStyle={{x: 1800, y: 1000}} style={sprungRange}>
       {({x, y}) => // interpolated x, y values
-       <div style={getStyle(x, y, index)} >
-        <img
+       <div
+        style={getStyle(x, y, index)}
+        id='container'>
+        <div id='card'>
+         <img
           className='front'
-          src={src}
-        />
-        <img 
+          src={backSrc}
+         />
+         <img 
           className='back'
           src={src}
-          
-       />
+        />
+       </div> 
       </div>
      }
     </Motion>
