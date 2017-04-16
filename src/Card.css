@@ -11,9 +11,15 @@
   transform: rotateY( 180deg );
 }
 
+/* Stack front and back elements over each other */
+.front, .back {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
 
 .container { 
-  width: 75px;
+  width: 75px; /* Should dynamically calculate depending on prop */
   height: 100px;
   perspective: 800px;
   position:relative;
