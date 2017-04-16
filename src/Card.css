@@ -1,21 +1,14 @@
 #card {
- 
+  width: 100%;
+  height: 100%;
   transform-style: preserve-3d;
-  position: absolute
-}
-
-
-.container #card {
-  margin: 0;
-  display: block;
-  position: absolute;
-  backface-visibility: hidden;
+  transition: transform 1s;
+  position: relative;
 }
 
 
 #card:hover  {
   transform: rotateY( 180deg );
-  transition: transform 1.2s;
 }
 
 
@@ -23,4 +16,5 @@
   width: 75px;
   height: 100px;
   perspective: 800px;
+  position:relative;
 }

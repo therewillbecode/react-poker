@@ -51,7 +51,7 @@ const getSrc = (index, size) => {
 
 const getStyle = (x, y) => ({
   WebkitTransform: `translate3d(${x}px, ${y}px, 0)`,
-  transform: `translate3d(${x}px, ${y}px, 0) rotateY(${0}deg) rotate(${0}deg)`,
+  transform: `translate3d(${x}px, ${y}px, 0)  rotate(${0}deg)`,
   position: 'absolute',
 })
 
@@ -96,7 +96,7 @@ const Card = props => {
       {({x, y}) => // interpolated x, y values
        <div
         style={getStyle(x, y, index)}
-        id='container'>
+        className='container'>
         <div id='card'>
          <img
           className='front'
