@@ -1,8 +1,7 @@
 #card {
-  width: 100%;
-  height: 100%;
+ 
   transform-style: preserve-3d;
-  position: relative
+  position: absolute
 }
 
 
@@ -16,7 +15,7 @@
 
 #card:hover  {
   transform: rotateY( 180deg );
-  transition: transform 1.4s;
+  transition: transform 1.2s;
 }
 
 
