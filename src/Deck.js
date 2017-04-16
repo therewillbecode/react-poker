@@ -59,7 +59,7 @@ class Deck extends Component {
           faceDown={false}
           doubleBacked={false}
           size={100}
-          mapXYZ={fan}
+          mapXYZ={stack}
         />
       )}
       </div>

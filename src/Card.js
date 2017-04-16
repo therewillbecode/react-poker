@@ -93,16 +93,15 @@ const Card = props => {
   return (
     <Motion defaultStyle={{x: 1800, y: 1000}} style={sprungRange}>
       {({x, y}) => // interpolated x, y values
-       <div>
+       <div style={getStyle(x, y, index)} >
         <img
           className='front'
           src={src}
-          style={getStyle(x, y, index)}
         />
         <img 
           className='back'
           src={src}
-          style={getStyle(x, y, index)}
+          
        />
       </div>
      }
