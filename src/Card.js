@@ -90,7 +90,10 @@ const Card = props => {
   const scaledY = y * scale
   const sprungRange = getSprings(scaledX, scaledY)
 
-
+/* 
+REMOVE TRANSITION DURATION FROM css
+on hover of #card div  dynamically render inline style for y transform using spring value
+*/
   return (
     <Motion defaultStyle={{x: 1800, y: 1000}} style={sprungRange}>
       {({x, y}) => // interpolated x, y values
