@@ -52,10 +52,11 @@ class Deck extends Component {
       {R.range(13, 65).map(i => 
         <CardContainer
           index={i}
+          key={i}
           faceDown={false}
           doubleBacked={false}
           size={100}
-          mapXYZ={spread}
+          mapXYZ={spreadShuffle}
         />
       )}
       </div>

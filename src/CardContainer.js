@@ -36,6 +36,16 @@ class CardContainer extends Component {
     this.flipCard = this.flipCard.bind(this)
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    if (this.props.color !== nextProps.color) {
+      return true;
+    }
+    if (this.state.count !== nextState.count) {
+      return true;
+    }
+    return true;
+  }
+
   flipCard () {
     const currentDegrees = this.state.rotationY
     const nextDegrees = currentDegrees === 0 ? 180 : 0
@@ -43,7 +53,7 @@ class CardContainer extends Component {
   }
 
   render () {
-    const { index, mapXYZ, size} = this.props
+    const { index, mapXYZ, size } = this.props
     const { rotationY } = this.state
     const defaultSize = 60 // px size of cards preset animation funcs based on
     const scale = size / defaultSize
