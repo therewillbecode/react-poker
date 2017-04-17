@@ -71,49 +71,56 @@ const defaultMapXYZ = i => ({
   z: i
 })
 
-const Card = props => {
-  const { index, faceDown, doubleBacked, mapXYZ, size} = props
-  const defaultSize = 60 // px size of cards preset animation funcs based on
-  const scale = size / defaultSize
-  const backSrc = window.Poker.getBackData(size)
-
-  let src = null
-  if (doubleBacked) {
-    src = backSrc
-  } else {
-    src = getSrc(index, size)
+class Card extends Component {
+  constructor (props) {
+    super(props)
+    this.state = { rotateY: 0 }
   }
 
-  const defaultStyle = getStyle(index * 3, index * 2) // initial coords
-  const { x, y } = mapXYZ(index) // coords to interpolate to
-  const scaledX = x * scale  // scale coords for card size
-  const scaledY = y * scale
-  const sprungRange = getSprings(scaledX, scaledY)
+  render () {
+    const { index, faceDown, doubleBacked, mapXYZ, size} = this.props
+    const defaultSize = 60 // px size of cards preset animation funcs based on
+    const scale = size / defaultSize
+    const backSrc = window.Poker.getBackData(size)
 
-/* 
-REMOVE TRANSITION DURATION FROM css
-on hover of #card div  dynamically render inline style for y transform using spring value
-*/
-  return (
-    <Motion defaultStyle={{x: 1800, y: 1000}} style={sprungRange}>
-      {({x, y}) => // interpolated x, y values
-       <div
-        style={getStyle(x, y, index)}
-        className='container'>
-        <div id='card'>
-         <img
-          className='front'
-          src={backSrc}
-         />
-         <img 
-          className='back'
-          src={src}
-        />
-       </div> 
-      </div>
-     }
-    </Motion>
-  )
+    let src = null
+    if (doubleBacked) {
+      src = backSrc
+    } else {
+      src = getSrc(index, size)
+    }
+
+    const defaultStyle = getStyle(index * 3, index * 2) // initial coords
+    const { x, y } = mapXYZ(index) // coords to interpolate to
+    const scaledX = x * scale  // scale coords for card size
+    const scaledY = y * scale
+    const sprungRange = getSprings(scaledX, scaledY)
+
+    /* 
+    REMOVE TRANSITION DURATION FROM css
+    on hover of #card div  dynamically render inline style for y transform using spring value
+    */
+    return (
+      <Motion defaultStyle={{ x: 1800, y: 1000 }} style={ sprungRange }>
+        {({x, y}) => // interpolated x, y values
+        <div
+          style={getStyle(x, y, index)}
+          className='container'>
+          <div id='card'>
+          <img
+            className='front'
+            src={backSrc}
+          />
+          <img 
+            className='back'
+            src={src}
+          />
+        </div> 
+        </div>
+      }
+      </Motion>
+    )
+  }
 }
 
 export default Card
