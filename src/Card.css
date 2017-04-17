@@ -20,8 +20,6 @@
 }
 
 .container { 
-  width: 75px; /* Should dynamically calculate depending on prop */
-  height: 100px;
   perspective: 800px;
   position:relative;
   z-index: 1;
