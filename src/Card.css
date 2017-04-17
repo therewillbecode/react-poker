@@ -4,7 +4,7 @@
   transform-style: preserve-3d;
   will-change: transform;
   transition: transform 0.4s;
-  transition-timing-function: cubic-bezier(0.25, 0.15, 0.25, 1);
+  transition-timing-function: ease-in-out
 }
 
 .back  {
