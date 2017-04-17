@@ -77,6 +77,10 @@ class Card extends Component {
     this.state = { rotateY: 0 }
   }
 
+  flipCard () {
+    console.log('fliiip')
+  }
+
   render () {
     const { index, faceDown, doubleBacked, mapXYZ, size} = this.props
     const defaultSize = 60 // px size of cards preset animation funcs based on
@@ -106,7 +110,7 @@ class Card extends Component {
         <div
           style={getStyle(x, y, index)}
           className='container'>
-          <div id='card'>
+          <div id='card' onMouseEnter={this.flipCard.bind(this)}>
           <img
             className='front'
             src={backSrc}
