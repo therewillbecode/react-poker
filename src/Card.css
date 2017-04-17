@@ -3,12 +3,11 @@
   height: 100%;
   transform-style: preserve-3d;
   will-change: transform;
-  transition: transform 0.5s;
+  transition: transform 1s;
   transition-timing-function: ease;
 }
 
 #card:hover {
-  transform: rotateY(180deg);
 }
 
 .back  {

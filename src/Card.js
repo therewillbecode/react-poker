@@ -55,6 +55,7 @@ const getStyle = (x, y) => ({
   position: 'absolute',
 })
 
+
 const springConfig = {
   stiffness: 170,
   damping: 27
@@ -74,14 +75,14 @@ const defaultMapXYZ = i => ({
 class Card extends Component {
   constructor (props) {
     super(props)
-    this.state = { rotateY: 0 }
+    this.state = { rotationY: 0 }
     this.flipCard = this.flipCard.bind(this)
   }
 
   flipCard () {
-    const currentDegrees = this.state.rotateY
+    const currentDegrees = this.state.rotationY
     const nextDegrees = currentDegrees === 0 ? 180 : 0
-    this.setState({ rotateY: nextDegrees })
+    this.setState({ rotationY: nextDegrees })
   }
 
   render () {
@@ -102,8 +103,8 @@ class Card extends Component {
     const scaledX = x * scale  // scale coords for card size
     const scaledY = y * scale
     const sprungRange = getSprings(scaledX, scaledY)
+    const rotationY = this.state.rotationY
 
-    
     return (
       <div onMouseEnter={this.flipCard} onMouseLeave={this.flipCard}>
        <Motion defaultStyle={{ x: 1800, y: 1000 }} style={sprungRange}> 
@@ -111,8 +112,8 @@ class Card extends Component {
         <div
           style={getStyle(x, y, index)}
           className='container'>
-          <div id='card' 
-
+          <div id='card'
+           style={{ transform: `rotateY(${rotationY}deg)`}}
           >
           <img
             className='front'
