@@ -7,9 +7,6 @@
   transition-timing-function: ease;
 }
 
-#card:hover {
-}
-
 .back  {
   transform: rotateY(180deg);
 }
