@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
-import { Motion, spring } from 'react-motion'
-import R from 'rambda'
+import { Motion, spring } from 'react-motion'  
 
-import './Card.css'
 
 function convertSuit (suit) {
   switch (suit) {
@@ -40,6 +38,7 @@ const getAttributes = i => ({
   rank: getRank(i)
 })
 
+
 const getSrc = (index, size) => {
   const attributes = getAttributes(index)
   let { suit, rank } = attributes
@@ -49,46 +48,9 @@ const getSrc = (index, size) => {
   return window.Poker.getCardData(size, suit, rank)
 }
 
-const getStyle = (x, y) => ({
-  WebkitTransform: `translate3d(${x}px, ${y}px, 0)`,
-  transform: `translate3d(${x}px, ${y}px, 0)  rotate(${0}deg)`,
-  position: 'absolute',
-})
 
-
-const springConfig = {
-  stiffness: 170,
-  damping: 27
-}
-
-const getSprings = (x, y) => ({
-  x: spring(x, springConfig),
-  y: spring(y, springConfig)
-})
-
-const defaultMapXYZ = i => ({
-  x: i * 4,
-  y: i * 4,
-  z: i
-})
-
-class Card extends Component {
-  constructor (props) {
-    super(props)
-    this.state = { rotationY: 0 }
-    this.flipCard = this.flipCard.bind(this)
-  }
-
-  flipCard () {
-    const currentDegrees = this.state.rotationY
-    const nextDegrees = currentDegrees === 0 ? 180 : 0
-    this.setState({ rotationY: nextDegrees })
-  }
-
-  render () {
-    const { index, faceDown, doubleBacked, mapXYZ, size} = this.props
-    const defaultSize = 60 // px size of cards preset animation funcs based on
-    const scale = size / defaultSize
+const Card = props => {
+    const { index, size } = props
     const backSrc = window.Poker.getBackData(size)
 
     let src = null
@@ -98,38 +60,12 @@ class Card extends Component {
       src = getSrc(index, size)
     }
 
-    const defaultStyle = getStyle(index * 3, index * 2) // initial coords
-    const { x, y } = mapXYZ(index) // coords to interpolate to
-    const scaledX = x * scale  // scale coords for card size
-    const scaledY = y * scale
-    const sprungRange = getSprings(scaledX, scaledY)
-    const rotationY = this.state.rotationY
-
     return (
-      <div onMouseEnter={this.flipCard} onMouseLeave={this.flipCard}>
-       <Motion defaultStyle={{ x: 1800, y: 1000 }} style={sprungRange}> 
-        {({x, y}) => // interpolated x, y values
-        <div
-          style={getStyle(x, y, index)}
-          className='container'>
-          <div id='card'
-           style={{ transform: `rotateY(${rotationY}deg)`}}
-          >
-          <img
-            className='front'
-            src={backSrc}
-          />
-          <img 
-            className='back'
-            src={src}
-          />
-        </div> 
-       </div>
-      }
-      </Motion>
-      </div>
-    )
-  }
+      <div id='card' style={{ transform: `rotateY(${rotationY}deg)`}}>
+        <img className='front' src={backSrc} />
+        <img className='back' src={src} />
+      </div> 
+     )
 }
-
+ 
 export default Card

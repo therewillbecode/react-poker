@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import R from 'rambda'
 import './Deck.css'
-import Card from './Card'
+import CardContainer from './CardContainer'
 
 
 const spreadShuffle = i => ({ 
@@ -37,15 +37,11 @@ const stack = i => ({
 class Deck extends Component {
   constructor(props){
     super(props)
-    this.state = {time: 0}
+    this.state = { time: 0 }
   }
 
   componentDidMount(){
     setInterval(() => this.setState({ time: Date.now()}), 300)
-  }
-  
-  spread (index){
-
   }
 
   render() {
@@ -54,7 +50,7 @@ class Deck extends Component {
     return (
       <div>
       {R.range(13, 65).map(i => 
-        <Card
+        <CardContainer
           index={i}
           faceDown={false}
           doubleBacked={false}
