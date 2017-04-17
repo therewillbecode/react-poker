@@ -3,7 +3,7 @@ import { Motion, spring } from 'react-motion'
 import R from 'rambda'
 
 import './Card.css'
-
+import Card from './Card'
 
 const getStyle = (x, y) => ({
   WebkitTransform: `translate3d(${x}px, ${y}px, 0)`,
@@ -11,18 +11,15 @@ const getStyle = (x, y) => ({
   position: 'absolute',
 })
 
-
 const springConfig = {
   stiffness: 170,
   damping: 27
 }
 
-
 const getSprings = (x, y) => ({
   x: spring(x, springConfig),
   y: spring(y, springConfig)
 })
-
 
 const defaultMapXYZ = i => ({
   x: i * 4,
@@ -30,8 +27,7 @@ const defaultMapXYZ = i => ({
   z: i
 })
 
-
-class Card extends Component {
+class CardContainer extends Component {
   constructor (props) {
     super(props)
     this.state = { rotationY: 0 }
@@ -46,10 +42,9 @@ class Card extends Component {
 
   render () {
     const { index, mapXYZ, size} = this.props
+    const { rotationY } = this.state
     const defaultSize = 60 // px size of cards preset animation funcs based on
     const scale = size / defaultSize
-    
-
     const defaultStyle = getStyle(index * 3, index * 2) // initial coords
     const { x, y } = mapXYZ(index) // coords to interpolate to
     const scaledX = x * scale  // scale coords for card size
@@ -62,13 +57,14 @@ class Card extends Component {
         {({x, y}) => // interpolated x, y values
         <div
           style={getStyle(x, y, index)}
-          className='container'>
-         <Card 
+          className='container'
+        >
+         <Card
            size={size}
            index={index}
            faceDown={this.props.faceDown}
            doubleBacked={this.props.doubleBacked}
-           rotationY={this.state.rotationY}
+           rotationY={rotationY}
          />
        </div>
       }
@@ -78,4 +74,4 @@ class Card extends Component {
   }
 }
 
-export default Card
+export default CardContainer
