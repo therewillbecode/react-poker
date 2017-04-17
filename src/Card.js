@@ -57,8 +57,6 @@ const Card = props => {
     src = getSrc(index, size)
   }
 
-  console.log(backSrc)
-
   return (
     <div id='card' style={{ transform: `rotateY(${rotationY}deg)`}}>
       <img className='front' src={backSrc} />
