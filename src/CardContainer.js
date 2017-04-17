@@ -15,7 +15,8 @@ const getStyle = (x, y, width, height) => ({
 
 const springConfig = {
   stiffness: 170,
-  damping: 27
+  damping: 27,
+  precision: 0.01
 }
 
 const getSprings = (x, y) => ({
@@ -36,15 +37,6 @@ class CardContainer extends Component {
     this.flipCard = this.flipCard.bind(this)
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    if (this.props.color !== nextProps.color) {
-      return true;
-    }
-    if (this.state.count !== nextState.count) {
-      return true;
-    }
-    return true;
-  }
 
   flipCard () {
     const currentDegrees = this.state.rotationY
