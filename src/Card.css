@@ -3,7 +3,7 @@
   height: 100%;
   transform-style: preserve-3d;
   will-change: transform;
-  transition: transform 0.4s;
+  transition: transform 0.20s;
   transition-timing-function: ease-in-out
 }
 
@@ -20,7 +20,7 @@
 }
 
 .container { 
-  perspective: 700px;
+  perspective: 400px;
   position:relative;
   z-index: 1;
 }
