@@ -3,7 +3,6 @@ import { Motion, spring } from 'react-motion'
 import R from 'rambda'
 import { fromJS } from 'immutable'
 
-
 import './Card.css'
 import Card from './Card'
 
@@ -26,11 +25,6 @@ const getSprings = (x, y) => ({
   y: spring(y, springConfig)
 })
 
-const defaultMapXYZ = i => ({
-  x: i * 4,
-  y: i * 4,
-  z: i
-})
 
 //change back to pure component - TODO
 class CardContainer extends PureComponent {
@@ -54,7 +48,7 @@ class CardContainer extends PureComponent {
     const scale = size / defaultSize
     const width = size * 0.75
     const height = size
-    const defaultStyle = getStyle(index * 3, index * 2, width, height) // initial coords
+    const defaultStyle = getStyle(index, index, width, height) // initial coords
     const { x, y } = mapXYZ(index) // coords to interpolate to
     const scaledX = x * scale  // scale coords for card size
     const scaledY = y * scale
@@ -65,7 +59,7 @@ class CardContainer extends PureComponent {
        <Motion defaultStyle={{ x: 1800, y: 1000 }} style={sprungRange}> 
         {({x, y}) => // interpolated x, y values
         <div
-          style={getStyle(x, y, index)}
+          style={getStyle(x, y, width, height)}
           className='container'
         >
          <Card

@@ -19,7 +19,7 @@ const spread = i => ({
 })
 
 const fan = i => ({ 
-  x: Math.cos(i) * 95,
+  x: Math.cos(i) * 95 + 400,
   y: Math.sin(i) * 95, 
   z : i
 })
@@ -42,18 +42,6 @@ class Deck extends PureComponent {
     this.state = { time: 0 }
   }
 
-  componentDidMount(){
-    Perf.start()
-
-    setTimeout(() => {
-      this.setState({ time: Date.now()})
-      Perf.stop()
-      console.log(Perf.printInclusive())
-
-    }
-    ,  2800  )
-  }
-
   render() {
    const cardsArr = List(R.range(13, 65))
    const size = 100
@@ -68,7 +56,7 @@ class Deck extends PureComponent {
           doubleBacked={false}
           faceDown={false}
           size={size}
-          mapXYZ={spreadShuffle}
+          mapXYZ={spread}
         />
       )}
       </div>
