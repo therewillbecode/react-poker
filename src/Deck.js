@@ -1,8 +1,9 @@
-import React, { Component } from 'react'
+import React, { PureComponent, Component } from 'react'
 import R from 'rambda'
 import './Deck.css'
 import CardContainer from './CardContainer'
 
+import Perf from 'react-addons-perf'; // ES6
 
 const spreadShuffle = i => ({ 
   x: Math.cos(i) * Math.floor((Math.random() * 200) + 1),
@@ -41,7 +42,15 @@ class Deck extends Component {
   }
 
   componentDidMount(){
-    setInterval(() => this.setState({ time: Date.now()}), 300)
+    Perf.start()
+
+    setTimeout(() => {
+      this.setState({ time: Date.now()})
+      Perf.stop()
+
+      console.log(Perf.printInclusive())
+    }
+    ,  2800  )
   }
 
   render() {

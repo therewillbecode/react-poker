@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import { Motion, spring } from 'react-motion'
 import R from 'rambda'
 
@@ -30,7 +30,7 @@ const defaultMapXYZ = i => ({
   z: i
 })
 
-class CardContainer extends Component {
+class CardContainer extends PureComponent {
   constructor (props) {
     super(props)
     this.state = { rotationY: 0 }
