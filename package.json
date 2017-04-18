@@ -6,6 +6,7 @@
     "react-scripts": "0.9.5"
   },
   "dependencies": {
+    "immutable": "^3.8.1",
     "rambda": "^0.5.6",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
