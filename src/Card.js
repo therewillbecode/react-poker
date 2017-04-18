@@ -1,5 +1,4 @@
-import React from 'react'
-import { Motion, spring } from 'react-motion'
+import React, { PureComponent} from 'react'
 
 function convertSuit (suit) {
   switch (suit) {
@@ -46,23 +45,25 @@ const getSrc = (index, size) => {
   return window.Poker.getCardData(size, suit, rank)
 }
 
-const Card = props => {
-  const { index, size, doubleBacked, rotationY } = props
-  const backSrc = window.Poker.getBackData(size)
+class Card extends PureComponent {
+  render () {
+    const { index, size, doubleBacked, rotationY } = this.props
+    const backSrc = window.Poker.getBackData(size)
+    let src = null
 
-  let src = null
-  if (doubleBacked) {
-    src = backSrc
-  } else {
-    src = getSrc(index, size)
+    if (doubleBacked) {
+      src = backSrc
+    } else {
+      src = getSrc(index, size)
+    }
+
+    return (
+      <div id='card' style={{transform: `rotateY(${rotationY}deg)`}}>
+        <img className='front' src={backSrc} />
+        <img className='back' src={src} />
+      </div>
+    )
   }
-
-  return (
-    <div id='card' style={{ transform: `rotateY(${rotationY}deg)`}}>
-      <img className='front' src={backSrc} />
-      <img className='back' src={src} />
-    </div>
-  )
 }
 
 export default Card
