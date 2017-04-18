@@ -2,7 +2,7 @@ import React, { PureComponent, Component } from 'react'
 import R from 'rambda'
 import './Deck.css'
 import CardContainer from './CardContainer'
-import immutable from 'immutable'
+import { List, fromJS } from 'immutable'
 
 import Perf from 'react-addons-perf'; // ES6
 
@@ -55,11 +55,11 @@ class Deck extends Component {
   }
 
   render() {
-   const cardSpacing = 22
+   const cardsArr = List(R.range(13, 65))
 
     return (
       <div>
-      {R.range(13, 65).map(i => 
+      {cardsArr.map(i => 
         <CardContainer
           index={i}
           key={i}
