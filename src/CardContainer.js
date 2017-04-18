@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import { Motion, spring } from 'react-motion'
 import R from 'rambda'
-import { fromJS } from 'immutable'
+import { fromJS, Map} from 'immutable'
 
 import './Card.css'
 import Card from './Card'
@@ -30,7 +30,7 @@ const getSprings = (x, y) => ({
 class CardContainer extends PureComponent {
   constructor (props) {
     super(props)
-    this.state = { rotationY: fromJS(0) }
+    this.state = { rotationY: 0 }
     this.flipCard = this.flipCard.bind(this)
   }
 
