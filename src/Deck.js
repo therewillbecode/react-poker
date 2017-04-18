@@ -36,7 +36,7 @@ const stack = i => ({
 
 // few built in such as fan, spread, sort etc
 
-class Deck extends Component {
+class Deck extends PureComponent {
   constructor(props){
     super(props)
     this.state = { time: 0 }
@@ -48,14 +48,15 @@ class Deck extends Component {
     setTimeout(() => {
       this.setState({ time: Date.now()})
       Perf.stop()
-
       console.log(Perf.printInclusive())
+
     }
     ,  2800  )
   }
 
   render() {
    const cardsArr = List(R.range(13, 65))
+   const size = 100
 
     return (
       <div>
@@ -65,7 +66,8 @@ class Deck extends Component {
           key={i}
           faceDown={false}
           doubleBacked={false}
-          size={100}
+          faceDown={false}
+          size={size}
           mapXYZ={spreadShuffle}
         />
       )}
@@ -73,6 +75,7 @@ class Deck extends Component {
     )
   }
 }
+
 
 Deck.propTypes = {
   // faceDown bool

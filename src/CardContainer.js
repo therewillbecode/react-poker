@@ -1,6 +1,8 @@
 import React, { PureComponent } from 'react'
 import { Motion, spring } from 'react-motion'
 import R from 'rambda'
+import { fromJS } from 'immutable'
+
 
 import './Card.css'
 import Card from './Card'
@@ -30,17 +32,18 @@ const defaultMapXYZ = i => ({
   z: i
 })
 
+//change back to pure component - TODO
 class CardContainer extends PureComponent {
   constructor (props) {
     super(props)
-    this.state = { rotationY: 0 }
+    this.state = { rotationY: fromJS(0) }
     this.flipCard = this.flipCard.bind(this)
   }
 
 
   flipCard () {
     const currentDegrees = this.state.rotationY
-    const nextDegrees = currentDegrees === 0 ? 180 : 0
+    const nextDegrees = fromJS(currentDegrees === 0 ? 180 : 0)
     this.setState({ rotationY: nextDegrees })
   }
 
