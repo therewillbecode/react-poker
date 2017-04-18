@@ -2,6 +2,7 @@ import React, { PureComponent, Component } from 'react'
 import R from 'rambda'
 import './Deck.css'
 import CardContainer from './CardContainer'
+import immutable from 'immutable'
 
 import Perf from 'react-addons-perf'; // ES6
 
