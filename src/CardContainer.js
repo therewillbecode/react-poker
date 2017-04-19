@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import { Motion, spring } from 'react-motion'
 import R from 'rambda'
-import { fromJS, Map} from 'immutable'
+import { fromJS, toJS, Map} from 'immutable'
 
 import './Card.css'
 import Card from './Card'

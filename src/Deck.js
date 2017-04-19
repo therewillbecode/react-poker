@@ -52,7 +52,6 @@ class Deck extends PureComponent {
         <CardContainer
           index={i}
           key={i}
-          faceDown={false}
           doubleBacked={false}
           faceDown={false}
           size={size}

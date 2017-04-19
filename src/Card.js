@@ -47,7 +47,7 @@ const getSrc = (index, size) => {
 
 class Card extends PureComponent {
   render () {
-    const { index, size, doubleBacked, rotationY } = this.props
+    const { index, size, doubleBacked, faceDown, rotationY} = this.props
     const backSrc = window.Poker.getBackData(size)
     let src = null
 
@@ -59,8 +59,8 @@ class Card extends PureComponent {
 
     return (
       <div id='card' style={{transform: `rotateY(${rotationY}deg)`}}>
-        <img className='front' src={backSrc} />
-        <img className='back' src={src} />
+        <img className={faceDown == true ? 'front' : 'back'} src={backSrc} />
+        <img className={faceDown == true ? 'back' : 'front'}  src={src} />
       </div>
     )
   }
