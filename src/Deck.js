@@ -72,6 +72,7 @@ const getCard = i => ({
 class Deck extends PureComponent {
   constructor(props){
     super(props)
+    // probs shouldnt be in state maybe use props
     this.state = { board: ['10h', '10c', '10d', 'Ad', 'Kc'] }
   }
 
@@ -89,8 +90,8 @@ class Deck extends PureComponent {
           board={board}
           card={getCard(i)}
           doubleBacked={true}
-          faceDown={false}
-          size={size}
+          faceDown={true}
+          size={100}
           mapXYZ={stack}
         />
       )}

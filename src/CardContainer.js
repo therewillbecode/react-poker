@@ -56,6 +56,8 @@ class CardContainer extends PureComponent {
     this.setState({ rotationY: nextDegrees })
   }
 
+
+
   render () {
     const { index, size, card, board } = this.props
     let { mapXYZ } = this.props
@@ -75,10 +77,12 @@ class CardContainer extends PureComponent {
 
     let { doubleBacked } = this.props
 
-    if (board.includes(card.rank + card.suit)){
+    if (board.includes(card.rank + card.suit)){ // board cards never doublebacked
       doubleBacked = false
-    }
+      // stagger flipping of cards
 
+
+    }
 
     return (
       <div onMouseEnter={this.flipCard} onMouseLeave={this.flipCard}>
