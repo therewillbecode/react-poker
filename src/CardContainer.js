@@ -7,9 +7,9 @@ import './Card.css'
 import Card from './Card'
 
 const overrideCard = (func, flop, card, size) => {
-  const { suit, rank } = card
-  const value = rank + suit
-    if(flop.includes(value) === true){
+  const value = card.rank + card.suit
+
+  if(flop.includes(value) === true){
       return () => ({
         x: 275 + (0.6 * size * flop.indexOf(value)),
         y: 50, 
@@ -57,10 +57,10 @@ class CardContainer extends PureComponent {
   }
 
   render () {
-    const { index, size, card, flop } = this.props
+    const { index, size, card, board } = this.props
     let { mapXYZ } = this.props
-    if (flop.length === 3){
-      mapXYZ = overrideCard(mapXYZ, flop, card, size)
+    if (board.length){
+      mapXYZ = overrideCard(mapXYZ, board, card, size)
     }
     const { rotationY } = this.state
     const defaultSize = 60 // px size of cards preset animation funcs based on
@@ -72,6 +72,13 @@ class CardContainer extends PureComponent {
     const scaledX = x * scale  // scale coords for card size
     const scaledY = y * scale
     const sprungRange = getSprings(scaledX, scaledY)
+
+    let { doubleBacked } = this.props
+
+    if (board.includes(card.rank + card.suit)){
+      doubleBacked = false
+    }
+
 
     return (
       <div onMouseEnter={this.flipCard} onMouseLeave={this.flipCard}>
@@ -86,7 +93,7 @@ class CardContainer extends PureComponent {
            index={index}
            card={card}
            faceDown={this.props.faceDown}
-           doubleBacked={this.props.doubleBacked}
+           doubleBacked={doubleBacked}
            rotationY={rotationY}
          />
        </div>

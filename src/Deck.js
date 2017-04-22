@@ -72,13 +72,13 @@ const getCard = i => ({
 class Deck extends PureComponent {
   constructor(props){
     super(props)
-    this.state = { flop: ['10h', '10c', '10d'] }
+    this.state = { board: ['10h', '10c', '10d', 'Ad', 'Kc'] }
   }
 
   render() {
    const cardsArr = List(R.range(13, 65))
    const size = 100
-   const { flop } = this.state
+   const { board } = this.state
 
     return (
       <div>
@@ -86,9 +86,9 @@ class Deck extends PureComponent {
         <CardContainer
           index={i}
           key={i}
-          flop={flop}
+          board={board}
           card={getCard(i)}
-          doubleBacked={false}
+          doubleBacked={true}
           faceDown={false}
           size={size}
           mapXYZ={stack}
