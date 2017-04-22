@@ -6,6 +6,7 @@ import { List, fromJS } from 'immutable'
 
 import Perf from 'react-addons-perf'; // ES6
 
+
 const spreadShuffle = i => ({ 
   x: Math.cos(i) * Math.floor((Math.random() * 200) + 1),
   y: Math.sin(i) * Math.floor((Math.random() * 200) + 1), 
@@ -30,21 +31,54 @@ const stack = i => ({
   z : i
 })
 
-// have one function that uses 3d flips to drop cards onto surface
 
-// deck takes a mapXYZ prop which is a func that maps a card index to X, Y, Z
+function convertSuit (suit) {
+  switch (suit) {
+    case 1:
+      return 'h'
+    case 2:
+      return 'd'
+    case 3:
+      return 's'
+    case 4:
+      return 'c'
+  }
+}
 
-// few built in such as fan, spread, sort etc
+function convertRank (rank) {
+  if (rank === 1) return 'A'
+  if (rank < 11) return rank
+
+  switch (rank) {
+    case 11:
+      return 'J'
+    case 12:
+      return 'Q'
+    case 13:
+      return 'K'
+  }
+}
+
+const getSuit = i => convertSuit(i / 13 | 0)
+
+const getRank = i => convertRank(i % 13 + 1)
+
+const getCard = i => ({
+  suit: getSuit(i),
+  rank: getRank(i)
+})
+
 
 class Deck extends PureComponent {
   constructor(props){
     super(props)
-    this.state = { time: 0 }
+    this.state = { flop: ['10h', '10c', '10d'] }
   }
 
   render() {
    const cardsArr = List(R.range(13, 65))
    const size = 100
+   const { flop } = this.state
 
     return (
       <div>
@@ -52,10 +86,12 @@ class Deck extends PureComponent {
         <CardContainer
           index={i}
           key={i}
+          flop={flop}
+          card={getCard(i)}
           doubleBacked={false}
           faceDown={false}
           size={size}
-          mapXYZ={spread}
+          mapXYZ={stack}
         />
       )}
       </div>
