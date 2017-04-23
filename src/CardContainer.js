@@ -10,6 +10,7 @@ const overrideCard = (func, flop, card, size) => {
   const value = card.rank + card.suit
 
   if(flop.includes(value) === true){
+
       return () => ({
         x: 275 + (0.6 * size * flop.indexOf(value)),
         y: 50, 
@@ -49,14 +50,26 @@ class CardContainer extends PureComponent {
     this.flipCard = this.flipCard.bind(this)
   }
 
+  componentWillUpdate(prevProps, prevState) {
+    const card = this.props.card.rank + this.props.card.suit
+        const newBoard = this.props.board
+console.log(newBoard.includes(card))
+   if (newBoard.includes(card)){
+    }
+
+    if (prevProps.board !== this.props.board ){ // if this card has changed on board then flip it after a delay(dealt)
+      setTimeout(()=>this.flipCard(),500)
+    }
+    console.log(prevProps)
+    console.log(this.props)
+  }
+
 
   flipCard () {
     const currentDegrees = this.state.rotationY
     const nextDegrees = fromJS(currentDegrees === 0 ? 180 : 0)
     this.setState({ rotationY: nextDegrees })
   }
-
-
 
   render () {
     const { index, size, card, board } = this.props
@@ -80,8 +93,6 @@ class CardContainer extends PureComponent {
     if (board.includes(card.rank + card.suit)){ // board cards never doublebacked
       doubleBacked = false
       // stagger flipping of cards
-
-
     }
 
     return (
