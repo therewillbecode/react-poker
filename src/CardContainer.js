@@ -49,19 +49,32 @@ class CardContainer extends PureComponent {
     this.state = { rotationY: 0 }
     this.flipCard = this.flipCard.bind(this)
   }
-
-  componentWillUpdate(prevProps, prevState) {
+  
+  shouldComponentUpdate(nextProps, nextState){
     const card = this.props.card.rank + this.props.card.suit
-        const newBoard = this.props.board
-console.log(newBoard.includes(card))
-   if (newBoard.includes(card)){
-    }
+    const nextBoard = nextProps.board
+    const currBoard = this.props.board 
+ 
+    if(nextProps.mapXYZ !== this.props.mapXYZ) return true
+    if(nextBoard.includes(card))  return true
+  
+    return false
+  }
 
-    if (prevProps.board !== this.props.board ){ // if this card has changed on board then flip it after a delay(dealt)
-      setTimeout(()=>this.flipCard(),500)
+  componentWillReceiveProps(nextProps) {
+    const card = this.props.card.rank + this.props.card.suit
+    const nextBoard = nextProps.board
+    const currBoard = this.props.board
+   console.log(nextBoard)
+   console.log(currBoard)
+    if(currBoard.indexOf(card) ===1){
+          setTimeout(() => this.flipCard(), 700)
+
+
     }
-    console.log(prevProps)
-    console.log(this.props)
+      
+    
+    
   }
 
 

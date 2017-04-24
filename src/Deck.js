@@ -77,10 +77,9 @@ class Deck extends PureComponent {
   }
 
   componentDidMount(){
-    setTimeout(() => this.setState({board: ['Ah', 'Ac', 'Ad'] }), 600)
+    setTimeout(() => this.setState({board: ['Ah', 'Ac', 'Ad'] }), 900)
     setTimeout(() => this.setState({board: ['Ah', 'Ac', 'Ad','2d'] }), 2200)
-        setTimeout(() => this.setState({board: ['Ah', 'Ac', 'Ad','2d', '9d'] }), 3200)
-
+    setTimeout(() => this.setState({board: ['Ah', 'Ac', 'Ad','2d', '9d'] }), 3200)
   }
 
   render() {
