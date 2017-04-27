@@ -106,6 +106,8 @@ class Deck extends PureComponent {
           doubleBacked={true}
           faceDown={true}
           size={100}
+          boardX={275} // board x offset relative to stack
+          boardY={50} // board y offset relative to stack
           mapXYZ={stack}
         />
       )}

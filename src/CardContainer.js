@@ -6,14 +6,14 @@ import { fromJS, toJS, Map} from 'immutable'
 import './Card.css'
 import Card from './Card'
 
-const overrideCard = (func, flop, card, size) => {
+const overrideCard = (func, flop, card, size, boardX, boardY) => {
   const value = card.rank + card.suit
 
   if(flop.includes(value) === true){
 
       return () => ({
-        x: 275 + (0.6 * size * flop.indexOf(value)),
-        y: 50, 
+        x: boardX + (0.6 * size * flop.indexOf(value)),
+        y: boardY, 
         z : 0
       })
     }
@@ -81,10 +81,10 @@ class CardContainer extends PureComponent {
   }
 
   render () {
-    const { index, size, card, board } = this.props
+    const { index, size, card, board, boardX, boardY } = this.props
     let { mapXYZ } = this.props
     if (board.length){
-      mapXYZ = overrideCard(mapXYZ, board, card, size)
+      mapXYZ = overrideCard(mapXYZ, board, card, size, boardX, boardY)
     }
     const { rotationY } = this.state
     const defaultSize = 60 // px size of cards preset animation funcs based on
