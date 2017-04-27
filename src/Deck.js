@@ -96,7 +96,7 @@ class Deck extends PureComponent {
    const { board, boardXoffset, boardYoffset } = this.state
 
     return (
-      <div ref={(input) => { if(input) this.boundingRect = input.getBoundingClientRect() }} >
+      <div>
       {cardsArr.map(i => 
         <CardContainer
           index={i}
@@ -108,8 +108,6 @@ class Deck extends PureComponent {
           size={100}
           boardXoffset={175} // board x offset relative to stack
           boardYoffset={50} // board y offset relative to stack
-          stackLeft={0}  // deck x coord
-          stackTop={0}  // deck y coord
           mapXYZ={stack}
         />
       )}
