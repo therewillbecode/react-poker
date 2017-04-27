@@ -62,15 +62,24 @@ class CardContainer extends PureComponent {
   }
   
   componentWillReceiveProps(nextProps) {
-    const card = this.props.card.rank + this.props.card.suit
-    const nextBoard = nextProps.board
-    const currBoard = this.props.board
+     const nextBoard = nextProps.board
+     const currBoard = this.props.board
+     const card = this.props.card.rank + this.props.card.suit
+     const isNewBoardCard = this.isNewBoardCard(currBoard, nextBoard, card)
+    
+     if(isNewBoardCard){
+        setTimeout(() => this.flipCard(), 900)
+    }
+  }
+
+  isNewBoardCard(currBoard, nextBoard, card){
     const NoNewItems = nextBoard.length - currBoard.length
     const newIndexes = nextBoard.length - NoNewItems
     const cardIndex = nextBoard.indexOf(card)
     if(cardIndex >= newIndexes && cardIndex <= cardIndex){
-      setTimeout(() => this.flipCard(), 900)
+      return true
     }
+    return false
   }
 
 
