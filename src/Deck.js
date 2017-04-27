@@ -89,7 +89,6 @@ class Deck extends PureComponent {
     }
   }
 
-
   render() {
     console.log('rerender')
    const cardsArr = List(R.range(13, 65))

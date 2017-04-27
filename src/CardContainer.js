@@ -31,7 +31,7 @@ const getStyle = (x, y, width, height) => ({
 })
 
 const springConfig = {
-  stiffness: 199,
+  stiffness: 230,
   damping: 47,
   precision: 0.01
 }
@@ -110,7 +110,6 @@ class CardContainer extends PureComponent {
 
     if (board.includes(card.rank + card.suit)){ // board cards never doublebacked
       doubleBacked = false
-      // stagger flipping of cards
     }
 
     return (
