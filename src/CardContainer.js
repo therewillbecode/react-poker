@@ -49,17 +49,7 @@ class CardContainer extends PureComponent {
     this.state = { rotationY: 0 }
     this.flipCard = this.flipCard.bind(this)
   }
-  
-  shouldComponentUpdate(nextProps, nextState){
-    const card = this.props.card.rank + this.props.card.suit
-    const nextBoard = nextProps.board
-    const currBoard = this.props.board 
  
-    if(nextProps.mapXYZ !== this.props.mapXYZ) return true
-    if(nextBoard.includes(card))  return true
-  
-    return false
-  }
   
   componentWillReceiveProps(nextProps) {
      const nextBoard = nextProps.board

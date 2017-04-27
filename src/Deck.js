@@ -80,8 +80,8 @@ class Deck extends PureComponent {
     setTimeout(() => this.setState({board: ['Ah', 'Ac', 'Ad'] }), 900)
     setTimeout(() => this.setState({board: ['Ah', 'Ac', 'Ad','2d'] }), 2200)
     setTimeout(() => this.setState({board: ['Ah', 'Ac', 'Ad','2d', '9d'] }), 3200)
-    setTimeout(() => this.setState({board: ['Ah', 'Ac', 'Ad','2d', '9d'] }), 3200)  
-  }
+    setTimeout(() => this.setState({board: [] }), 5200)  
+}
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.board) {
