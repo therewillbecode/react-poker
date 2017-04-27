@@ -31,8 +31,8 @@ const getStyle = (x, y, width, height) => ({
 })
 
 const springConfig = {
-  stiffness: 230,
-  damping: 47,
+  stiffness: 340, // 230
+  damping: 88,  // 47
   precision: 0.01
 }
 
@@ -58,7 +58,8 @@ class CardContainer extends PureComponent {
      const isNewBoardCard = this.isNewBoardCard(currBoard, nextBoard, card)
     
      if(isNewBoardCard){
-        setTimeout(() => this.flipCard(), 900)
+        const flipDelayScale = (1 / ((1 + nextBoard.indexOf(card))) / 10) + 1  // delay based on distance to travel to board 
+        setTimeout(() => this.flipCard(), 500 * flipDelayScale)
     }
   }
 
