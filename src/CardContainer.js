@@ -19,7 +19,6 @@ const overrideCard = (func, flop, card, size, boardX, boardY) => {
     }
   
   return func
-
 } 
 
 const getStyle = (x, y, width, height) => ({
@@ -49,8 +48,7 @@ class CardContainer extends PureComponent {
     this.state = { rotationY: 0 }
     this.flipCard = this.flipCard.bind(this)
   }
- 
-  
+
   componentWillReceiveProps(nextProps) {
      const nextBoard = nextProps.board
      const currBoard = this.props.board
@@ -84,10 +82,7 @@ class CardContainer extends PureComponent {
     const { index, size, card, board, boardXoffset, boardYoffset, stackLeft, stackTop } = this.props
     let { mapXYZ } = this.props
     if (board.length){
-      let boardX = stackLeft + boardXoffset
-      let boardY = stackTop + boardYoffset
-     console.log(boardX)
-      mapXYZ = overrideCard(mapXYZ, board, card, size, boardX, boardY)
+      mapXYZ = overrideCard(mapXYZ, board, card, size, boardXoffset, boardYoffset)
     }
     const { rotationY } = this.state
     const defaultSize = 60 // px size of cards preset animation funcs based on

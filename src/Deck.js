@@ -106,10 +106,10 @@ class Deck extends PureComponent {
           doubleBacked={true}
           faceDown={true}
           size={100}
-          boardXoffset={275} // board x offset relative to stack
+          boardXoffset={175} // board x offset relative to stack
           boardYoffset={50} // board y offset relative to stack
-          stackLeft={this.boundingRect.left}  // deck x coord
-          stackTop={this.boundingRect.top}  // deck y coord
+          stackLeft={0}  // deck x coord
+          stackTop={0}  // deck y coord
           mapXYZ={stack}
         />
       )}
