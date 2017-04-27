@@ -75,12 +75,20 @@ class Deck extends PureComponent {
     // probs shouldnt be in state maybe use props
     this.state = { board: [] }
   }
-
+  
   componentDidMount(){
     setTimeout(() => this.setState({board: ['Ah', 'Ac', 'Ad'] }), 900)
     setTimeout(() => this.setState({board: ['Ah', 'Ac', 'Ad','2d'] }), 2200)
     setTimeout(() => this.setState({board: ['Ah', 'Ac', 'Ad','2d', '9d'] }), 3200)
+    setTimeout(() => this.setState({board: ['Ah', 'Ac', 'Ad','2d', '9d'] }), 3200)  
   }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.board) {
+      this.setState({ board: nextProps.board })
+    }
+  }
+
 
   render() {
     console.log('rerender')
