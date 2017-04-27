@@ -90,13 +90,13 @@ class Deck extends PureComponent {
   }
 
   render() {
-    console.log('rerender')
+   console.log(this.boundingRect)
    const cardsArr = List(R.range(13, 65))
    const size = 100
-   const { board } = this.state
+   const { board, boardXoffset, boardYoffset } = this.state
 
     return (
-      <div>
+      <div ref={(input) => { if(input) this.boundingRect = input.getBoundingClientRect() }} >
       {cardsArr.map(i => 
         <CardContainer
           index={i}
@@ -106,22 +106,16 @@ class Deck extends PureComponent {
           doubleBacked={true}
           faceDown={true}
           size={100}
-          boardX={275} // board x offset relative to stack
-          boardY={50} // board y offset relative to stack
+          boardXoffset={275} // board x offset relative to stack
+          boardYoffset={50} // board y offset relative to stack
+          stackLeft={this.boundingRect.left}  // deck x coord
+          stackTop={this.boundingRect.top}  // deck y coord
           mapXYZ={stack}
         />
       )}
       </div>
     )
   }
-}
-
-
-Deck.propTypes = {
-  // faceDown bool
-  // doubleBacked  bool
-  
-  ///mapXYZ  - func - takes an i and returns {x, y}
 }
 
 export default Deck

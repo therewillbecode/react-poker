@@ -81,9 +81,12 @@ class CardContainer extends PureComponent {
   }
 
   render () {
-    const { index, size, card, board, boardX, boardY } = this.props
+    const { index, size, card, board, boardXoffset, boardYoffset, stackLeft, stackTop } = this.props
     let { mapXYZ } = this.props
     if (board.length){
+      let boardX = stackLeft + boardXoffset
+      let boardY = stackTop + boardYoffset
+     console.log(boardX)
       mapXYZ = overrideCard(mapXYZ, board, card, size, boardX, boardY)
     }
     const { rotationY } = this.state
