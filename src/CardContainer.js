@@ -65,8 +65,6 @@ class CardContainer extends PureComponent {
     const card = this.props.card.rank + this.props.card.suit
     const nextBoard = nextProps.board
     const currBoard = this.props.board
-    console.log(`next board is ${nextBoard}`)
-    console.log(`current board is ${currBoard}`)
     const NoNewItems = nextBoard.length - currBoard.length
     const newIndexes = nextBoard.length - NoNewItems
     const cardIndex = nextBoard.indexOf(card)
