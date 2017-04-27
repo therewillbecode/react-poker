@@ -31,8 +31,8 @@ const getStyle = (x, y, width, height) => ({
 })
 
 const springConfig = {
-  stiffness: 170,
-  damping: 27,
+  stiffness: 199,
+  damping: 47,
   precision: 0.01
 }
 
@@ -69,7 +69,7 @@ class CardContainer extends PureComponent {
     const newIndexes = nextBoard.length - NoNewItems
     const cardIndex = nextBoard.indexOf(card)
     if(cardIndex >= newIndexes && cardIndex <= cardIndex){
-      setTimeout(() => this.flipCard(), 700)
+      setTimeout(() => this.flipCard(), 900)
     }
   }
 
