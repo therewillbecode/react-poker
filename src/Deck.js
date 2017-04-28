@@ -89,12 +89,30 @@ class Deck extends Component {
     }
   }
 
+  componentWillUpdate(){
+    this.prevBoard = this.state.board  // store reference for comparison to see if shuffle needed
+  }
+
+  shouldShuffle(currBoard) {
+    if (this.prevBoard.length === 5 && currBoard.length === 0) {
+      this.shuffle()
+    }
+  
+  }
+
+  shuffle() {
+    console.log('shuffff')
+
+  }
+  
+
   render() {
-   console.log(this.boundingRect)
    const cardsArr = List(R.range(13, 65))
    const size = 100
    const { board, boardXoffset, boardYoffset } = this.state
-
+   
+   this.prevBoard ? this.shouldShuffle(board) : null
+   
     return (
       <div>
       {cardsArr.map(i => 
