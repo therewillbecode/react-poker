@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React, { PureComponent , Component } from 'react'
 import { Motion, spring } from 'react-motion'
 import R from 'rambda'
 import { fromJS, toJS, Map} from 'immutable'
@@ -6,19 +6,13 @@ import { fromJS, toJS, Map} from 'immutable'
 import './Card.css'
 import Card from './Card'
 
-const overrideCard = (func, flop, card, size, boardX, boardY) => {
-  const value = card.rank + card.suit
 
-  if(flop.includes(value) === true){
-
-      return () => ({
-        x: boardX + (0.6 * size * flop.indexOf(value)),
+const overrideCard = (value, board, card, size, boardX, boardY) => {
+       return () => ({
+        x: boardX + (0.6 * size * board.indexOf(value)),
         y: boardY, 
         z : 0
       })
-    }
-  
-  return func
 } 
 
 const getStyle = (x, y, width, height) => ({
@@ -42,7 +36,7 @@ const getSprings = (x, y) => ({
 
 
 //change back to pure component - TODO
-class CardContainer extends PureComponent {
+class CardContainer extends Component {
   constructor (props) {
     super(props)
     this.state = { rotationY: 0 }
@@ -54,7 +48,7 @@ class CardContainer extends PureComponent {
      const currBoard = this.props.board
      const card = this.props.card.rank + this.props.card.suit
      const isNewBoardCard = this.isNewBoardCard(currBoard, nextBoard, card)
-    
+
      if(isNewBoardCard){
         const flipDelayScale = (1 / ((1 + nextBoard.indexOf(card))) / 10) + 1  // delay based on distance to travel to board 
         setTimeout(() => this.flipCard(), 500 * flipDelayScale)
@@ -72,17 +66,19 @@ class CardContainer extends PureComponent {
   }
 
 
-  flipCard () {
+  flipCard() {
     const currentDegrees = this.state.rotationY
     const nextDegrees = fromJS(currentDegrees === 0 ? 180 : 0)
     this.setState({ rotationY: nextDegrees })
   }
 
-  render () {
+
+  render() {
     const { index, size, card, board, boardXoffset, boardYoffset, stackLeft, stackTop } = this.props
     let { mapXYZ } = this.props
-    if (board.length){
-      mapXYZ = overrideCard(mapXYZ, board, card, size, boardXoffset, boardYoffset)
+    const value = card.rank + card.suit
+    if(board.includes(value) === true){
+      mapXYZ = overrideCard(value, board, card, size, boardXoffset, boardYoffset)
     }
     const { rotationY } = this.state
     const defaultSize = 60 // px size of cards preset animation funcs based on

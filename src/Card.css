@@ -4,7 +4,7 @@
   transform-style: preserve-3d;
   will-change: transform;
   transition: transform 0.20s;
-  transition-timing-function: ease-in-out
+  transition-timing-function: ease-in-out;
 }
 
 .back  {

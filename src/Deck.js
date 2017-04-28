@@ -69,11 +69,11 @@ const getCard = i => ({
 })
 
 
-class Deck extends PureComponent {
+class Deck extends Component {
   constructor(props){
     super(props)
     // probs shouldnt be in state maybe use props
-    this.state = { board: [] }
+    this.state = { board: [], mapXYZ: spreadShuffle }
   }
   
   componentDidMount(){
@@ -107,7 +107,7 @@ class Deck extends PureComponent {
           faceDown={true}
           size={100}
           boardXoffset={175} // board x offset relative to stack
-          boardYoffset={50} // board y offset relative to stack
+          boardYoffset={100} // board y offset relative to stack
           mapXYZ={stack}
         />
       )}
