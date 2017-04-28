@@ -73,7 +73,7 @@ class Deck extends Component {
   constructor(props){
     super(props)
     // probs shouldnt be in state maybe use props
-    this.state = { board: [], mapXYZ: spreadShuffle }
+    this.state = { board: [] }
   }
   
   componentDidMount(){

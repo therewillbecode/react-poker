@@ -24,7 +24,7 @@ const getStyle = (x, y, width, height) => ({
 const springConfig = {
   stiffness: 340, // 230
   damping: 88,  // 47
-  precision: 0.01
+  precision: 0.0001
 }
 
 const getSprings = (x, y) => ({
