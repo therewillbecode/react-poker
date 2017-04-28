@@ -1,7 +1,5 @@
 import React, { PureComponent} from 'react'
 
-
-
 const getSrc = (card, size) => {
   let { suit, rank } = card
   return window.Poker.getCardData(size, suit, rank)
@@ -21,8 +19,8 @@ class Card extends PureComponent {
 
     return (
       <div id='card' style={{transform: `rotateY(${rotationY}deg)`}}>
-        <img className={faceDown == true ? 'front' : 'back'} src={backSrc} />
-        <img className={faceDown == true ? 'back' : 'front'}  src={src} />
+        <img className={faceDown === true ? 'front' : 'back'} src={backSrc} />
+        <img className={faceDown === true ? 'back' : 'front'} src={src} />
       </div>
     )
   }

@@ -1,19 +1,17 @@
-import React, { PureComponent , Component } from 'react'
+import React, { PureComponent, Component } from 'react'
 import { Motion, spring } from 'react-motion'
-import R from 'rambda'
 import { fromJS, toJS, Map} from 'immutable'
 
 import './Card.css'
 import Card from './Card'
 
-
 const dealBoard = (value, board, card, size, boardX, boardY) => {
- return () => ({
-   x: boardX + (0.6 * size * board.indexOf(value)),
-   y: boardY, 
-   z : 0
+  return () => ({
+    x: boardX + (0.6 * size * board.indexOf(value)),
+    y: boardY,
+    z: 0
   })
-} 
+}
 
 const getStyle = (x, y, width, height) => ({
   WebkitTransform: `translate3d(${x}px, ${y}px, 0)`,
@@ -34,8 +32,7 @@ const getSprings = (x, y) => ({
   y: spring(y, springConfig)
 })
 
-
-//change back to pure component - TODO
+// change back to pure component - TODO
 class CardContainer extends Component {
   constructor (props) {
     super(props)
@@ -43,40 +40,40 @@ class CardContainer extends Component {
     this.flipCard = this.flipCard.bind(this)
   }
 
-  componentWillReceiveProps(nextProps) {
-     const nextBoard = nextProps.board
-     const currBoard = this.props.board
-     const card = this.props.card.rank + this.props.card.suit
-     const isNewBoardCard = this.isNewBoardCard(currBoard, nextBoard, card)
+  componentWillReceiveProps (nextProps) {
+    const nextBoard = nextProps.board
+    const currBoard = this.props.board
+    const card = this.props.card.rank + this.props.card.suit
+    const isNewBoardCard = this.isNewBoardCard(currBoard, nextBoard, card)
 
-     if(isNewBoardCard){
-       const flipDelayScale = (1 / ((1 + nextBoard.indexOf(card))) / 10) + 1  // delay based on distance to travel to board 
-       setTimeout(() => this.flipCard(), 500 * flipDelayScale)
+    if (isNewBoardCard) {
+      const flipDelayScale = (1 / ((1 + nextBoard.indexOf(card))) / 10) + 1  // delay based on distance to travel to board
+      setTimeout(() => this.flipCard(), 500 * flipDelayScale)
     }
   }
 
-  isNewBoardCard(currBoard, nextBoard, card){
+  isNewBoardCard (currBoard, nextBoard, card) {
     const NoNewItems = nextBoard.length - currBoard.length
     const newIndexes = nextBoard.length - NoNewItems
     const cardIndex = nextBoard.indexOf(card)
 
-    if(cardIndex >= newIndexes && cardIndex <= cardIndex){
+    if (cardIndex >= newIndexes && cardIndex <= cardIndex) {
       return true
     }
     return false
   }
 
-  flipCard() {
+  flipCard () {
     const currentDegrees = this.state.rotationY
     const nextDegrees = fromJS(currentDegrees === 0 ? 180 : 0)
     this.setState({ rotationY: nextDegrees })
   }
 
-  render() {
+  render () {
     const { index, size, card, board, boardXoffset, boardYoffset, stackLeft, stackTop } = this.props
     let { mapXYZ } = this.props
     const value = card.rank + card.suit
-    if(board.includes(value) === true){
+    if (board.includes(value) === true) {
       mapXYZ = dealBoard(value, board, card, size, boardXoffset, boardYoffset)
     }
     const { rotationY } = this.state
@@ -92,29 +89,29 @@ class CardContainer extends Component {
 
     let { doubleBacked } = this.props
 
-    if (board.includes(card.rank + card.suit)){ // board cards never doublebacked
+    if (board.includes(card.rank + card.suit)) { // board cards never doublebacked
       doubleBacked = false
     }
 
     return (
       <div onMouseEnter={this.flipCard} onMouseLeave={this.flipCard}>
-       <Motion defaultStyle={{ x: 1800, y: 1000 }} style={sprungRange}> 
-        {({x, y}) => // interpolated x, y values
-        <div
-          style={getStyle(x, y, width, height)}
-          className='container'
-        >
-         <Card
-           size={size}
-           index={index}
-           card={card}
-           faceDown={this.props.faceDown}
-           doubleBacked={doubleBacked}
-           rotationY={rotationY}
-         />
-       </div>
-      }
-      </Motion>
+        <Motion defaultStyle={{ x: 1800, y: 1000 }} style={sprungRange}>
+          {({x, y}) => // interpolated x, y values
+           <div
+              style={getStyle(x, y, width, height)}
+              className='container'
+           >
+             <Card
+               size={size}
+               index={index}
+               card={card}
+               faceDown={this.props.faceDown}
+               doubleBacked={doubleBacked}
+               rotationY={rotationY}
+             />
+           </div>
+          }
+        </Motion>
       </div>
     )
   }
