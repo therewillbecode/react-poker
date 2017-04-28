@@ -7,12 +7,12 @@ import './Card.css'
 import Card from './Card'
 
 
-const overrideCard = (value, board, card, size, boardX, boardY) => {
-       return () => ({
-        x: boardX + (0.6 * size * board.indexOf(value)),
-        y: boardY, 
-        z : 0
-      })
+const dealBoard = (value, board, card, size, boardX, boardY) => {
+ return () => ({
+   x: boardX + (0.6 * size * board.indexOf(value)),
+   y: boardY, 
+   z : 0
+  })
 } 
 
 const getStyle = (x, y, width, height) => ({
@@ -50,8 +50,8 @@ class CardContainer extends Component {
      const isNewBoardCard = this.isNewBoardCard(currBoard, nextBoard, card)
 
      if(isNewBoardCard){
-        const flipDelayScale = (1 / ((1 + nextBoard.indexOf(card))) / 10) + 1  // delay based on distance to travel to board 
-        setTimeout(() => this.flipCard(), 500 * flipDelayScale)
+       const flipDelayScale = (1 / ((1 + nextBoard.indexOf(card))) / 10) + 1  // delay based on distance to travel to board 
+       setTimeout(() => this.flipCard(), 500 * flipDelayScale)
     }
   }
 
@@ -59,12 +59,12 @@ class CardContainer extends Component {
     const NoNewItems = nextBoard.length - currBoard.length
     const newIndexes = nextBoard.length - NoNewItems
     const cardIndex = nextBoard.indexOf(card)
+
     if(cardIndex >= newIndexes && cardIndex <= cardIndex){
       return true
     }
     return false
   }
-
 
   flipCard() {
     const currentDegrees = this.state.rotationY
@@ -72,13 +72,12 @@ class CardContainer extends Component {
     this.setState({ rotationY: nextDegrees })
   }
 
-
   render() {
     const { index, size, card, board, boardXoffset, boardYoffset, stackLeft, stackTop } = this.props
     let { mapXYZ } = this.props
     const value = card.rank + card.suit
     if(board.includes(value) === true){
-      mapXYZ = overrideCard(value, board, card, size, boardXoffset, boardYoffset)
+      mapXYZ = dealBoard(value, board, card, size, boardXoffset, boardYoffset)
     }
     const { rotationY } = this.state
     const defaultSize = 60 // px size of cards preset animation funcs based on
