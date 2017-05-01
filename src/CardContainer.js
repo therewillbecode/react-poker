@@ -7,18 +7,19 @@ import Card from './Card'
 
 const dealBoard = (value, board, card, size, boardX, boardY) => {
   return () => ({
-    x: boardX + (0.6 * size * board.indexOf(value)),
+    x: boardX + (size * board.indexOf(value)),
     y: boardY,
     z: 0
   })
 }
 
-const getStyle = (x, y, width, height) => ({
+const getStyle = (x, y, width, height, zIndex) => ({
   WebkitTransform: `translate3d(${x}px, ${y}px, 0)`,
   transform: `translate3d(${x}px, ${y}px, 0)  rotate(${0}deg)`,
   position: 'absolute',
   width: `${width}px`,
-  height: `${height}px`
+  height: `${height}px`,
+  zIndex: `${zIndex}`
 })
 
 const springConfig = {
@@ -33,7 +34,7 @@ const getSprings = (x, y) => ({
 })
 
 // change back to pure component - TODO
-class CardContainer extends Component {
+class CardContainer extends PureComponent {
   constructor (props) {
     super(props)
     this.state = { rotationY: 0 }
@@ -72,15 +73,15 @@ class CardContainer extends Component {
   render () {
     const { index, size, card, board, boardXoffset, boardYoffset, stackLeft, stackTop } = this.props
     let { mapXYZ } = this.props
+    const scale = size / size
+    const width = size * 0.75
+    const height = size
     const value = card.rank + card.suit
     if (board.includes(value) === true) {
       mapXYZ = dealBoard(value, board, card, size, boardXoffset, boardYoffset)
     }
     const { rotationY } = this.state
-    const defaultSize = 60 // px size of cards preset animation funcs based on
-    const scale = size / defaultSize
-    const width = size * 0.75
-    const height = size
+   
     const defaultStyle = getStyle(index, index, width, height) // initial coords
     const { x, y } = mapXYZ(index, card) // coords to interpolate to
     const scaledX = x * scale  // scale coords for card size
@@ -88,17 +89,21 @@ class CardContainer extends Component {
     const sprungRange = getSprings(scaledX, scaledY)
 
     let { doubleBacked } = this.props
-
-    if (board.includes(card.rank + card.suit)) { // board cards never doublebacked
+    const boardCard = board.includes(value)
+    if (boardCard) { // board cards never doublebacked
       doubleBacked = false
     }
 
+    const zIndex = board.indexOf(value) === -1 ? 1 : board.indexOf(value) + 1
+
+
+// flippable    onMouseEnter={this.flipCard} onMouseLeave={this.flipCard}
     return (
-      <div onMouseEnter={this.flipCard} onMouseLeave={this.flipCard}>
+      <div >
         <Motion defaultStyle={{ x: 1800, y: 1000 }} style={sprungRange}>
           {({x, y}) => // interpolated x, y values
            <div
-              style={getStyle(x, y, width, height)}
+              style={getStyle(x, y, width, height, zIndex)}
               className='container'
            >
              <Card

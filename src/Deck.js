@@ -69,7 +69,7 @@ const getCard = i => ({
 })
 
 
-class Deck extends Component {
+class Deck extends PureComponent {
   constructor(props){
     super(props)
     // probs shouldnt be in state maybe use props
@@ -123,9 +123,9 @@ class Deck extends Component {
           card={getCard(i)}
           doubleBacked={true}
           faceDown={true}
-          size={100}
-          boardXoffset={175} // board x offset relative to stack
-          boardYoffset={100} // board y offset relative to stack
+          size={250}
+          boardXoffset={1075} // board x offset relative to stack
+          boardYoffset={600} // board y offset relative to stack
           mapXYZ={stack}
         />
       )}
