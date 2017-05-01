@@ -1,36 +1,14 @@
-import React, { PureComponent, Component } from 'react'
+import React, { PureComponent } from 'react'
 import R from 'rambda'
 import './Deck.css'
+
 import CardContainer from './CardContainer'
-import { List, fromJS } from 'immutable'
-
-import Perf from 'react-addons-perf'; // ES6
-
-
-const spreadShuffle = i => ({ 
-  x: Math.cos(i) * Math.floor((Math.random() * 200) + 1),
-  y: Math.sin(i) * Math.floor((Math.random() * 200) + 1), 
-  z : 0
-})
-
-const spread = i => ({ 
-  x: (i * 12) - 100,
-  y: 50, 
-  z : 0
-})
-
-const fan = i => ({ 
-  x: Math.cos(i) * 95 + 400,
-  y: Math.sin(i) * 95, 
-  z : i
-})
 
 const stack = i => ({
-  x: 0.1 * i,
-  y: 0.1 * i, 
-  z : i
+  x: 0.25 * i,
+  y: 0.25 * i,
+  z: i
 })
-
 
 function convertSuit (suit) {
   switch (suit) {
@@ -61,72 +39,36 @@ function convertRank (rank) {
 
 const getSuit = i => convertSuit(i / 13 | 0)
 
-const getRank = i => convertRank(i % 13 + 1)
+const getRank = i => convertRank((i % 13) + 1)
 
 const getCard = i => ({
   suit: getSuit(i),
   rank: getRank(i)
 })
 
-
 class Deck extends PureComponent {
-  constructor(props){
-    super(props)
-    // probs shouldnt be in state maybe use props
-    this.state = { board: [] }
-  }
-  
-  componentDidMount(){
-    setTimeout(() => this.setState({board: ['Ah', 'Ac', 'Ad'] }), 900)
-    setTimeout(() => this.setState({board: ['Ah', 'Ac', 'Ad','2d'] }), 2200)
-    setTimeout(() => this.setState({board: ['Ah', 'Ac', 'Ad','2d', '9d'] }), 3200)
-    setTimeout(() => this.setState({board: [] }), 5200)  
-}
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.board) {
-      this.setState({ board: nextProps.board })
-    }
+  componentWillUpdate () {
+    this.prevBoard = this.props.board  // store reference for comparison to see if shuffle needed
   }
 
-  componentWillUpdate(){
-    this.prevBoard = this.state.board  // store reference for comparison to see if shuffle needed
-  }
+  render () {
+    const cardsArr = R.range(13, 65)
+    const { board, boardXoffset, boardYoffset, height } = this.props
 
-  shouldShuffle(currBoard) {
-    if (this.prevBoard.length === 5 && currBoard.length === 0) {
-      this.shuffle()
-    }
-  
-  }
-
-  shuffle() {
-    console.log('shuffff')
-
-  }
-  
-
-  render() {
-   const cardsArr = List(R.range(13, 65))
-   const size = 100
-   const { board, boardXoffset, boardYoffset } = this.state
-   
-   this.prevBoard ? this.shouldShuffle(board) : null
-   
     return (
       <div>
-      {cardsArr.map(i => 
-        <CardContainer
-          index={i}
-          key={i}
-          board={board}
-          card={getCard(i)}
-          doubleBacked={true}
-          faceDown={true}
-          size={250}
-          boardXoffset={1075} // board x offset relative to stack
-          boardYoffset={600} // board y offset relative to stack
-          mapXYZ={stack}
+        {cardsArr.map(i =>
+          <CardContainer
+            index={i}
+            key={i}
+            board={board}
+            card={getCard(i)}
+            doubleBacked
+            faceDown
+            height={height}
+            boardXoffset={boardXoffset} // board x offset relative to stack
+            boardYoffset={boardYoffset} // board y offset relative to stack
+            mapXYZ={stack}
         />
       )}
       </div>

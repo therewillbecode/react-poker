@@ -1,13 +1,12 @@
-import React, { PureComponent, Component } from 'react'
+import React, { PureComponent } from 'react'
 import { Motion, spring } from 'react-motion'
-import { fromJS, toJS, Map} from 'immutable'
 
 import './Card.css'
 import Card from './Card'
 
-const dealBoard = (value, board, card, size, boardX, boardY) => {
+const dealBoard = (value, board, card, height, boardX, boardY) => {
   return () => ({
-    x: boardX + (size * board.indexOf(value)),
+    x: boardX + (height * board.indexOf(value)),
     y: boardY,
     z: 0
   })
@@ -58,7 +57,7 @@ class CardContainer extends PureComponent {
     const newIndexes = nextBoard.length - NoNewItems
     const cardIndex = nextBoard.indexOf(card)
 
-    if (cardIndex >= newIndexes && cardIndex <= cardIndex) {
+    if (cardIndex >= newIndexes) {
       return true
     }
     return false
@@ -66,55 +65,45 @@ class CardContainer extends PureComponent {
 
   flipCard () {
     const currentDegrees = this.state.rotationY
-    const nextDegrees = fromJS(currentDegrees === 0 ? 180 : 0)
+    const nextDegrees = currentDegrees === 0 ? 180 : 0
     this.setState({ rotationY: nextDegrees })
   }
 
   render () {
-    const { index, size, card, board, boardXoffset, boardYoffset, stackLeft, stackTop } = this.props
+    const { index, height, card, board, boardXoffset, boardYoffset } = this.props
     let { mapXYZ } = this.props
-    const scale = size / size
-    const width = size * 0.75
-    const height = size
+    const width = height * 0.75
     const value = card.rank + card.suit
     if (board.includes(value) === true) {
-      mapXYZ = dealBoard(value, board, card, size, boardXoffset, boardYoffset)
+      mapXYZ = dealBoard(value, board, card, height, boardXoffset, boardYoffset)
     }
     const { rotationY } = this.state
-   
-    const defaultStyle = getStyle(index, index, width, height) // initial coords
     const { x, y } = mapXYZ(index, card) // coords to interpolate to
-    const scaledX = x * scale  // scale coords for card size
-    const scaledY = y * scale
-    const sprungRange = getSprings(scaledX, scaledY)
-
+    const sprungRange = getSprings(x, y)
     let { doubleBacked } = this.props
     const boardCard = board.includes(value)
     if (boardCard) { // board cards never doublebacked
       doubleBacked = false
     }
-
     const zIndex = board.indexOf(value) === -1 ? 1 : board.indexOf(value) + 1
 
-
-// flippable    onMouseEnter={this.flipCard} onMouseLeave={this.flipCard}
     return (
-      <div >
+      <div onMouseEnter={this.flipCard} onMouseLeave={this.flipCard}>
         <Motion defaultStyle={{ x: 1800, y: 1000 }} style={sprungRange}>
           {({x, y}) => // interpolated x, y values
-           <div
+            <div
               style={getStyle(x, y, width, height, zIndex)}
               className='container'
            >
-             <Card
-               size={size}
+            <Card
+               height={height}
                index={index}
                card={card}
                faceDown={this.props.faceDown}
                doubleBacked={doubleBacked}
                rotationY={rotationY}
              />
-           </div>
+            </div>
           }
         </Motion>
       </div>

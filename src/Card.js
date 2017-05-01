@@ -1,20 +1,20 @@
 import React, { PureComponent} from 'react'
 
-const getSrc = (card, size) => {
+const getSrc = (card, height) => {
   let { suit, rank } = card
-  return window.Poker.getCardData(size, suit, rank)
+  return window.Poker.getCardData(height, suit, rank)
 }
 
 class Card extends PureComponent {
   render () {
-    const { index, card, size, doubleBacked, faceDown, rotationY} = this.props
-    const backSrc = window.Poker.getBackData(size)
+    const { index, card, height, doubleBacked, faceDown, rotationY} = this.props
+    const backSrc = window.Poker.getBackData(height)
     let src = null
 
     if (doubleBacked) {
       src = backSrc
     } else {
-      src = getSrc(card, size)
+      src = getSrc(card, height)
     }
 
     return (
