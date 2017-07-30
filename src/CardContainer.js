@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Motion, spring } from "react-motion";
-import { fromJS, toJS, Map } from "immutable";
 
 import "./Card.css";
 import Card from "./Card";
@@ -89,7 +88,7 @@ class CardContainer extends Component {
 
   flipCard() {
     const currentDegrees = this.state.rotationY;
-    const nextDegrees = fromJS(currentDegrees === 0 ? 180 : 0);
+    const nextDegrees = currentDegrees === 0 ? 180 : 0;
     this.setState({ rotationY: nextDegrees });
   }
 

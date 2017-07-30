@@ -38,7 +38,6 @@
   "homepage": "http://facebook.github.io/react-deck",
   "dependencies": {
     "dev": "^0.1.3",
-    "immutable": "^3.8.1",
     "motion": "^5.0.0-beta26",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",

@@ -1,6 +1,17 @@
 import React, { Component } from "react";
 
 class Card extends Component {
+  shouldComponentUpdate(nextProps) {
+    if (nextProps.rotationY !== this.props.rotationY) {
+      return true;
+    }
+
+    if (nextProps.size !== this.props.size) {
+      return true;
+    }
+
+    return false;
+  }
   render() {
     const {
       index,

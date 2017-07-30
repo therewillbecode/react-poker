@@ -1,10 +1,7 @@
 import React, { Component } from "react";
 import "./Deck.css";
 import CardContainer from "./CardContainer";
-import { List, fromJS } from "immutable";
 import renderCard from "./cardRenderer";
-
-import Perf from "react-addons-perf"; // ES6
 
 const range = (start, count) =>
   Array.apply(0, Array(count)).map((element, index) => {
