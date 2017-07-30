@@ -130,7 +130,6 @@ class CardContainer extends Component {
 
     const zIndex = board.indexOf(value) === -1 ? 1 : board.indexOf(value) + 1;
 
-    // flippable    onMouseEnter={this.flipCard} onMouseLeave={this.flipCard}
     return (
       <div>
         <Motion defaultStyle={{ x: 1800, y: 1000 }} style={sprungRange}>
