@@ -2,7 +2,7 @@
   "name": "react-deck",
   "version": "0.0.1",
   "description": "React component for dealing cards",
-  "main": "dist/index.js",
+  "main": "dist/react-deck.js",
   "scripts": {
     "build": "rm -rf dist/* && webpack -p --env.production --env.platform=web --progress --config webpack.prod.config.js",
     "test": "jest --env=jsdom"
