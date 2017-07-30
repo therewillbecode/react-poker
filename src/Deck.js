@@ -113,6 +113,7 @@ class DeckContainer extends Component {
               boardXoffset={boardXoffset} // board x offset relative to stack
               boardYoffset={boardYoffset} // board y offset relative to stack
               mapXYZ={stack}
+              flipOnHover={flipOnHover}
             />
           );
         })}
