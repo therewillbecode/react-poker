@@ -4,31 +4,22 @@
   "description": "React component for dealing cards",
   "main": "dist/index.js",
   "scripts": {
-    "build": "rm -rf dist/* && webpack -p --config webpack.prod.config.js",
+    "build": "rm -rf dist/* && webpack -p --env.production --env.platform=web --progress --config webpack.prod.config.js",
     "test": "jest --env=jsdom"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/therewillbecode/react-deck.git"
   },
-  "keywords": [
-    "react",
-    "deck",
-    "cards",
-    "poker"
-  ],
+  "keywords": ["react", "deck", "cards", "poker"],
   "author": "therewillbecode",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/therewillbecode/react-deck/issues"
   },
   "jest": {
-    "collectCoverageFrom": [
-      "src/**/*.{js,jsx}"
-    ],
-    "setupFiles": [
-      "<rootDir>/config/polyfills.js"
-    ],
+    "collectCoverageFrom": ["src/**/*.{js,jsx}"],
+    "setupFiles": ["<rootDir>/config/polyfills.js"],
     "testPathIgnorePatterns": [
       "<rootDir>[/\\\\](build|docs|node_modules|scripts)[/\\\\]"
     ],
@@ -39,9 +30,7 @@
       "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
       "^(?!.*\\.(js|jsx|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
     },
-    "transformIgnorePatterns": [
-      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$"
-    ],
+    "transformIgnorePatterns": ["[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$"],
     "moduleNameMapper": {
       "^react-native$": "react-native-web"
     }

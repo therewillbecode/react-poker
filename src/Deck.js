@@ -108,4 +108,4 @@ class DeckContainer extends Component {
   }
 }
 
-export default Deck;
+export default DeckContainer;

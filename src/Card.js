@@ -1,14 +1,15 @@
 import React, { Component } from "react";
+import renderCard from "./cardRenderer";
 
 const getSrc = (card, size) => {
   let { suit, rank } = card;
-  return window.Poker.getCardData(size, suit, rank);
+  return renderCard.getCardData(size, suit, rank);
 };
 
 class Card extends Component {
   render() {
     const { index, card, size, doubleBacked, faceDown, rotationY } = this.props;
-    const backSrc = window.Poker.getBackData(size);
+    const backSrc = renderCard.getBackData(size);
     let src = null;
 
     if (doubleBacked) {

@@ -14,17 +14,8 @@ module.exports = {
     filename: "react-deck.js"
   },
   plugins: [
-    new ExtractTextPlugin("styles-[hash].css"),
-    new webpack.DefinePlugin({
-      "process.env": {
-        NODE_ENV: JSON.stringify("production")
-      }
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
-      }
-    })
+    new ExtractTextPlugin("styles.css"),
+    new webpack.optimize.ModuleConcatenationPlugin()
   ],
 
   externals: [
@@ -39,7 +30,7 @@ module.exports = {
   ],
 
   module: {
-    loaders: [
+    rules: [
       {
         test: /.jsx?$/,
         loader: "babel-loader",
@@ -50,8 +41,10 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        loader:
-          "style-loader!css-loader?modules=true&localIdentName=[name]__[local]___[hash:base64:5]"
+        use: ExtractTextPlugin.extract({
+          fallback: "style-loader",
+          use: "css-loader"
+        })
       }
     ]
   },

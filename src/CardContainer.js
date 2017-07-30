@@ -53,6 +53,27 @@ class CardContainer extends Component {
     }
   }
 
+  shouldComponentUpdate(nextProps) {
+    const nextBoard = nextProps.board;
+    const currBoard = this.props.board;
+    const card = this.props.card.rank + this.props.card.suit;
+    const isNewBoardCard = this.isNewBoardCard(currBoard, nextBoard, card);
+
+    if (isNewBoardCard) {
+      return true;
+    }
+
+    const isCurrBoardCard = this.props.board.includes(card);
+
+    if (isCurrBoardCard) {
+      return true;
+    } else {
+      this.setState({ rotationY: 0 });
+
+      return false;
+    }
+  }
+
   isNewBoardCard(currBoard, nextBoard, card) {
     const NoNewItems = nextBoard.length - currBoard.length;
     const newIndexes = nextBoard.length - NoNewItems;
