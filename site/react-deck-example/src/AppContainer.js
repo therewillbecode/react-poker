@@ -107,6 +107,7 @@ class AppContainer extends Component {
           boardXoffset={575}
           boardYoffset={400}
           height={200}
+          size={200}
         />
       </div>
     );

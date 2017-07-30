@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./Deck.css";
 import CardContainer from "./CardContainer";
 import { List, fromJS } from "immutable";
+import renderCard from "./cardRenderer";
 
 import Perf from "react-addons-perf"; // ES6
 
@@ -65,10 +66,19 @@ const getSuit = i => convertSuit((i / 13) | 0);
 
 const getRank = i => convertRank(i % 13 + 1);
 
+const getSrc = (card, size) => {
+  let { suit, rank } = card;
+  return renderCard.getCardData(size, suit, rank);
+};
+
 const getCard = i => ({
   suit: getSuit(i),
   rank: getRank(i)
 });
+
+const getCardBack = size => renderCard.getBackData(size);
+
+const getCardFront = (card, size) => getSrc(card, size);
 
 class DeckContainer extends Component {
   constructor(props) {
@@ -86,26 +96,36 @@ class DeckContainer extends Component {
   render() {
     const cardsArr = List(range(13, 65));
     const { board, boardXoffset, boardYoffset } = this.state;
+    const { size } = this.props;
 
     return (
       <div>
-        {cardsArr.map(i =>
-          <CardContainer
-            index={i}
-            key={i}
-            board={board}
-            card={getCard(i)}
-            doubleBacked={false}
-            faceDown={true}
-            size={200}
-            boardXoffset={475} // board x offset relative to stack
-            boardYoffset={300} // board y offset relative to stack
-            mapXYZ={stack}
-          />
-        )}
+        {cardsArr.map(i => {
+          const card = getCard(i);
+          const cardFront = getCardFront(card, size);
+          const cardBack = getCardBack(size);
+
+          return (
+            <CardContainer
+              index={i}
+              key={i}
+              board={board}
+              card={card}
+              cardFront={cardFront}
+              cardBack={cardBack}
+              faceDown={true}
+              size={size}
+              boardXoffset={475} // board x offset relative to stack
+              boardYoffset={300} // board y offset relative to stack
+              mapXYZ={stack}
+            />
+          );
+        })}
       </div>
     );
   }
 }
+
+DeckContainer.defaultProps = {};
 
 export default DeckContainer;

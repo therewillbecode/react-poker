@@ -64,10 +64,10 @@ class CardContainer extends Component {
     const card = this.props.card.rank + this.props.card.suit;
     const isNewBoardCard = this.isNewBoardCard(currBoard, nextBoard, card);
 
-    if (isNewBoardCard) {
+    if (isNewBoardCard || ) {
       return true;
     } else {
-       return false;
+      return false;
     }
   }
 */
@@ -97,7 +97,9 @@ class CardContainer extends Component {
       boardXoffset,
       boardYoffset,
       stackLeft,
-      stackTop
+      stackTop,
+      cardBack,
+      cardFront
     } = this.props;
     let { mapXYZ } = this.props;
     const scale = size / size;
@@ -136,6 +138,8 @@ class CardContainer extends Component {
               className="container"
             >
               <Card
+                cardBack={cardBack}
+                cardFront={cardFront}
                 size={size}
                 index={index}
                 card={card}
