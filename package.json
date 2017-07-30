@@ -1,0 +1,56 @@
+{
+  "name": "react-deck",
+  "version": "0.0.1",
+  "description": "React component for dealing cards",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "jest --env=jsdom"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/therewillbecode/react-deck.git"
+  },
+  "keywords": [
+    "react",
+    "deck",
+    "cards",
+    "poker"
+  ],
+  "author": "therewillbecode",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/therewillbecode/react-deck/issues"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx}"
+    ],
+    "setupFiles": [
+      "<rootDir>/config/polyfills.js"
+    ],
+    "testPathIgnorePatterns": [
+      "<rootDir>[/\\\\](build|docs|node_modules|scripts)[/\\\\]"
+    ],
+    "testEnvironment": "node",
+    "testURL": "http://localhost",
+    "transform": {
+      "^.+\\.(js|jsx)$": "<rootDir>/node_modules/babel-jest",
+      "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
+      "^(?!.*\\.(js|jsx|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
+    },
+    "transformIgnorePatterns": [
+      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$"
+    ],
+    "moduleNameMapper": {
+      "^react-native$": "react-native-web"
+    }
+  },
+  "homepage": "http://facebook.github.io/react-deck",
+  "dependencies": {
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1"
+  },
+  "devDependencies": {
+    "jest": "^20.0.4"
+  }
+}
