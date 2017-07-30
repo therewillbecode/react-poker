@@ -51,8 +51,13 @@ class CardContainer extends Component {
       const flipDelayScale = 1 / (1 + nextBoard.indexOf(card)) / 10 + 1; // delay based on distance to travel to board
       setTimeout(() => this.flipCard(), 500 * flipDelayScale);
     }
-  }
 
+    if (nextBoard.length === 0 && currBoard.includes(card)) {
+      const flipDelayScale = 1 / (1 + currBoard.indexOf(card)) / 10 + 1;
+      setTimeout(() => this.flipCard(), 2 * flipDelayScale);
+    }
+  }
+  /*
   shouldComponentUpdate(nextProps) {
     const nextBoard = nextProps.board;
     const currBoard = this.props.board;
@@ -61,25 +66,17 @@ class CardContainer extends Component {
 
     if (isNewBoardCard) {
       return true;
-    }
-
-    const isCurrBoardCard = this.props.board.includes(card);
-
-    if (isCurrBoardCard) {
-      return true;
     } else {
-      this.setState({ rotationY: 0 });
-
-      return false;
+       return false;
     }
   }
-
+*/
   isNewBoardCard(currBoard, nextBoard, card) {
     const NoNewItems = nextBoard.length - currBoard.length;
     const newIndexes = nextBoard.length - NoNewItems;
     const cardIndex = nextBoard.indexOf(card);
 
-    if (cardIndex >= newIndexes && cardIndex <= cardIndex) {
+    if (cardIndex >= newIndexes) {
       return true;
     }
     return false;

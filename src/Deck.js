@@ -95,7 +95,7 @@ class DeckContainer extends Component {
             key={i}
             board={board}
             card={getCard(i)}
-            doubleBacked={true}
+            doubleBacked={false}
             faceDown={true}
             size={200}
             boardXoffset={475} // board x offset relative to stack
