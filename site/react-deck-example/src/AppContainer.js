@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
-import Deck from "../../dist/react-deck";
+import Deck from "../../../dist/react-deck";
+require("../../../dist/styles.css");
 
 const range = (start, count) =>
   Array.apply(0, Array(count)).map((element, index) => {
