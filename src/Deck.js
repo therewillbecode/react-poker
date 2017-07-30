@@ -94,13 +94,12 @@ class DeckContainer extends Component {
   }
 
   render() {
-    const cardsArr = List(range(13, 65));
     const { board, boardXoffset, boardYoffset } = this.state;
     const { size } = this.props;
 
     return (
       <div>
-        {cardsArr.map(i => {
+        {range(13, 65).map(i => {
           const card = getCard(i);
           const cardFront = getCardFront(card, size);
           const cardBack = getCardBack(size);

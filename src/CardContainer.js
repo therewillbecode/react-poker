@@ -54,7 +54,7 @@ class CardContainer extends Component {
 
     if (nextBoard.length === 0 && currBoard.includes(card)) {
       const flipDelayScale = 1 / (1 + currBoard.indexOf(card)) / 10 + 1;
-      setTimeout(() => this.flipCard(), 2 * flipDelayScale);
+      setTimeout(() => this.flipCard(), 0.5 * flipDelayScale);
     }
   }
   /*
