@@ -101,7 +101,7 @@ class AppContainer extends Component {
 
     return (
       <div>
-        <button onClick={this.progressDeal} />
+        <button onClick={this.progressDeal}>Deal</button>
         <Deck
           board={board}
           boardXoffset={575}
