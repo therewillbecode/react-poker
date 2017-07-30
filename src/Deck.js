@@ -126,6 +126,10 @@ class DeckContainer extends Component {
   }
 }
 
-DeckContainer.defaultProps = {};
+DeckContainer.defaultProps = {
+  size: 200,
+  boardXoffset: 475,
+  boardYoffset: 300
+};
 
 export default DeckContainer;
