@@ -53,24 +53,29 @@ class CardContainer extends Component {
     }
 
     if (nextBoard.length === 0 && currBoard.includes(card)) {
-      const flipDelayScale = 1 / (1 + currBoard.indexOf(card)) / 10 + 1;
-      setTimeout(() => this.flipCard(), 0.5 * flipDelayScale);
+      this.flipCard();
     }
   }
-  /*
-  shouldComponentUpdate(nextProps) {
+
+  shouldComponentUpdate(nextProps, nextState) {
     const nextBoard = nextProps.board;
     const currBoard = this.props.board;
     const card = this.props.card.rank + this.props.card.suit;
     const isNewBoardCard = this.isNewBoardCard(currBoard, nextBoard, card);
 
-    if (isNewBoardCard || ) {
+    if (nextState.rotationY !== this.state.rotationY) {
+      return true;
+    }
+    if (
+      isNewBoardCard ||
+      (nextBoard.length === 0 && currBoard.includes(card))
+    ) {
       return true;
     } else {
       return false;
     }
   }
-*/
+
   isNewBoardCard(currBoard, nextBoard, card) {
     const NoNewItems = nextBoard.length - currBoard.length;
     const newIndexes = nextBoard.length - NoNewItems;
