@@ -1,0 +1,26 @@
+#card {
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  will-change: transform;
+  transition: transform 0.20s;
+  transition-timing-function: ease-in-out;
+}
+
+.back  {
+  transform: rotateY(180deg);
+}
+
+/* Stack front and back elements over each other */
+.front, .back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  backface-visibility: hidden;
+}
+
+.container { 
+  perspective: 400px;
+  position:relative;
+  z-index: 1;
+}
