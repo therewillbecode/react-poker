@@ -103,15 +103,23 @@ class CardContainer extends Component {
       stackLeft,
       stackTop,
       cardBack,
-      cardFront
+      cardFront,
+      flipOnHover
     } = this.props;
     let { mapXYZ } = this.props;
     const scale = size / size;
     const width = size * 0.75;
     const height = size;
-    const value = card.rank + card.suit;
-    if (board.includes(value) === true) {
-      mapXYZ = dealBoard(value, board, card, size, boardXoffset, boardYoffset);
+    const cardValue = card.rank + card.suit;
+    if (board.includes(cardValue) === true) {
+      mapXYZ = dealBoard(
+        cardValue,
+        board,
+        card,
+        size,
+        boardXoffset,
+        boardYoffset
+      );
     }
     const { rotationY } = this.state;
 
@@ -122,16 +130,28 @@ class CardContainer extends Component {
     const sprungRange = getSprings(scaledX, scaledY);
 
     let { doubleBacked } = this.props;
-    const boardCard = board.includes(value);
+    const boardCard = board.includes(cardValue);
     if (boardCard) {
       // board cards never doublebacked
       doubleBacked = false;
     }
 
-    const zIndex = board.indexOf(value) === -1 ? 1 : board.indexOf(value) + 1;
+    const zIndex =
+      board.indexOf(cardValue) === -1 ? 1 : board.indexOf(cardValue) + 1;
 
     return (
-      <div>
+      <div
+        onMouseEnter={
+          flipOnHover
+            ? () => (board.includes(cardValue) ? this.flipCard() : null)
+            : null
+        }
+        onMouseLeave={
+          flipOnHover
+            ? () => (board.includes(cardValue) ? this.flipCard() : null)
+            : null
+        }
+      >
         <Motion defaultStyle={{ x: 1800, y: 1000 }} style={sprungRange}>
           {(
             { x, y } // interpolated x, y values

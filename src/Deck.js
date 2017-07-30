@@ -80,7 +80,6 @@ const getCardFront = (card, size) => getSrc(card, size);
 class DeckContainer extends Component {
   constructor(props) {
     super(props);
-    // probs shouldnt be in state maybe use props
     this.state = { board: [] };
   }
 
@@ -91,8 +90,8 @@ class DeckContainer extends Component {
   }
 
   render() {
-    const { board, boardXoffset, boardYoffset } = this.state;
-    const { size } = this.props;
+    const { board } = this.state;
+    const { size, flipOnHover, boardYoffset, boardXoffset } = this.props;
 
     return (
       <div>
@@ -111,8 +110,8 @@ class DeckContainer extends Component {
               cardBack={cardBack}
               faceDown={true}
               size={size}
-              boardXoffset={475} // board x offset relative to stack
-              boardYoffset={300} // board y offset relative to stack
+              boardXoffset={boardXoffset} // board x offset relative to stack
+              boardYoffset={boardYoffset} // board y offset relative to stack
               mapXYZ={stack}
             />
           );
@@ -125,7 +124,8 @@ class DeckContainer extends Component {
 DeckContainer.defaultProps = {
   size: 200,
   boardXoffset: 475,
-  boardYoffset: 300
+  boardYoffset: 300,
+  flipOnHover: true
 };
 
 export default DeckContainer;
