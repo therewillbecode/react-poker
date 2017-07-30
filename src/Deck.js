@@ -107,7 +107,7 @@ class DeckContainer extends Component {
           return (
             <CardContainer
               index={i}
-              key={i}
+              key={card.rank + card.suit}
               board={board}
               card={card}
               cardFront={cardFront}
