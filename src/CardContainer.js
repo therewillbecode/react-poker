@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { Motion, spring } from "react-motion";
 
 import "./Card.css";
@@ -22,8 +22,8 @@ const getStyle = (x, y, width, height, zIndex) => ({
 });
 
 const springConfig = {
-  stiffness: 340, // 230
-  damping: 88, // 47
+  stiffness: 340,
+  damping: 88,
   precision: 0.0001
 };
 
@@ -32,8 +32,7 @@ const getSprings = (x, y) => ({
   y: spring(y, springConfig)
 });
 
-// change back to pure component - TODO
-class CardContainer extends Component {
+class CardContainer extends PureComponent {
   constructor(props) {
     super(props);
     this.state = { rotationY: 0 };
