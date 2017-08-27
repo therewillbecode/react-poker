@@ -2,7 +2,6 @@ import React, { Component } from "react";
 
 import Deck from "../dist/react-poker";
 require("../dist/styles.css");
-// add custom size and custom spring settings!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 const range = (start, count) =>
   Array.apply(0, Array(count)).map((element, index) => {
@@ -108,13 +107,7 @@ class AppContainer extends Component {
         >
           Deal
         </button>
-        <Deck
-          board={board}
-          boardXoffset={375}
-          boardYoffset={200}
-          height={200}
-          size={200}
-        />
+        <Deck board={board} boardXoffset={375} boardYoffset={200} size={200} />
       </div>
     );
   }
