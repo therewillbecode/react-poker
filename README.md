@@ -1,5 +1,5 @@
-# react-deck
+# react-poker
 A react component for dealing a poker card game
 
 
-[Click here for a demo](http://therewillbecode.github.io/react-deck)
+[Click here for a demo](http://therewillbecode.github.io/react-poker)

@@ -11,7 +11,7 @@ module.exports = {
     library: "react-deck",
     libraryTarget: "umd",
     path: __dirname + "/dist/",
-    filename: "react-deck.js"
+    filename: "react-poker.js"
   },
   plugins: [
     new ExtractTextPlugin("styles.css"),
