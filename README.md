@@ -3,6 +3,8 @@ A react component for dealing a poker card game
 
 [Click here for a demo](http://therewillbecode.github.io/react-poker)
 
+![react-poker](https://image.ibb.co/ebO3P5/poker.png)
+
 ## getting started
 install the module inside your project root 
     
