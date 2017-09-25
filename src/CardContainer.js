@@ -101,8 +101,6 @@ class CardContainer extends PureComponent {
       boardYoffset,
       stackLeft,
       stackTop,
-      cardBack,
-      cardFront,
       flipOnHover
     } = this.props;
     let { mapXYZ } = this.props;
@@ -141,35 +139,34 @@ class CardContainer extends PureComponent {
     return (
       <div
         onMouseEnter={
-          flipOnHover
-            ? () => (board.includes(cardValue) ? this.flipCard() : null)
-            : null
+          flipOnHover ? (
+            () => (board.includes(cardValue) ? this.flipCard() : null)
+          ) : null
         }
         onMouseLeave={
-          flipOnHover
-            ? () => (board.includes(cardValue) ? this.flipCard() : null)
-            : null
+          flipOnHover ? (
+            () => (board.includes(cardValue) ? this.flipCard() : null)
+          ) : null
         }
       >
         <Motion defaultStyle={{ x: 1800, y: 1000 }} style={sprungRange}>
           {(
             { x, y } // interpolated x, y values
-          ) =>
+          ) => (
             <div
               style={getStyle(x, y, width, height, zIndex)}
               className="container"
             >
               <Card
-                cardBack={cardBack}
-                cardFront={cardFront}
                 size={size}
                 index={index}
-                card={card}
+                card={card.rank + card.suit}
                 faceDown={this.props.faceDown}
                 doubleBacked={doubleBacked}
                 rotationY={rotationY}
               />
-            </div>}
+            </div>
+          )}
         </Motion>
       </div>
     );

@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import "./Deck.css";
 import CardContainer from "./CardContainer";
-import renderCard from "./cardRenderer";
 
 const range = (start, count) =>
   Array.apply(0, Array(count)).map((element, index) => {
@@ -61,21 +60,12 @@ function convertRank(rank) {
 
 const getSuit = i => convertSuit((i / 13) | 0);
 
-const getRank = i => convertRank(i % 13 + 1);
-
-const getSrc = (card, size) => {
-  let { suit, rank } = card;
-  return renderCard.getCardData(size, suit, rank);
-};
+const getRank = i => convertRank(i % 13);
 
 const getCard = i => ({
   suit: getSuit(i),
   rank: getRank(i)
 });
-
-const getCardBack = size => renderCard.getBackData(size);
-
-const getCardFront = (card, size) => getSrc(card, size);
 
 class DeckContainer extends Component {
   constructor(props) {
@@ -97,17 +87,13 @@ class DeckContainer extends Component {
       <div>
         {range(13, 65).map(i => {
           const card = getCard(i);
-          const cardFront = getCardFront(card, size);
-          const cardBack = getCardBack(size);
 
-          return (
+          return card.rank ? (
             <CardContainer
               index={i}
               key={card.rank + card.suit}
               board={board}
               card={card}
-              cardFront={cardFront}
-              cardBack={cardBack}
               faceDown={true}
               size={size}
               boardXoffset={boardXoffset} // board x offset relative to stack
@@ -115,7 +101,7 @@ class DeckContainer extends Component {
               mapXYZ={stack}
               flipOnHover={flipOnHover}
             />
-          );
+          ) : null;
         })}
       </div>
     );
