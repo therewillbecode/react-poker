@@ -31,46 +31,32 @@ const stack = i => ({
   z: i
 });
 
-function convertSuit(suit) {
-  switch (suit) {
-    case 1:
-      return "h";
-    case 2:
-      return "d";
-    case 3:
-      return "s";
-    case 4:
-      return "c";
-  }
-}
+const suits = ["d", "c", "h", "s"];
+const ranks = [
+  "A",
+  "2",
+  "3",
+  "4",
+  "5",
+  "6",
+  "7",
+  "8",
+  "9",
+  "10",
+  "J",
+  "Q",
+  "K"
+];
 
-function convertRank(rank) {
-  if (rank === 1) return "A";
-  if (rank < 11) return rank;
-
-  switch (rank) {
-    case 11:
-      return "J";
-    case 12:
-      return "Q";
-    case 13:
-      return "K";
-  }
-}
-
-const getSuit = i => convertSuit((i / 13) | 0);
-
-const getRank = i => convertRank(i % 13);
-
-const getCard = i => ({
-  suit: getSuit(i),
-  rank: getRank(i)
-});
+const getInitialDeck = () =>
+  ranks
+    .map(r => suits.map(s => ({ rank: r, suit: s })))
+    .reduce((prev, curr) => prev.concat(curr));
 
 class DeckContainer extends Component {
   constructor(props) {
     super(props);
-    this.state = { board: [] };
+    this.state = { board: [], deck: [] };
   }
 
   componentWillReceiveProps(nextProps) {
@@ -85,10 +71,8 @@ class DeckContainer extends Component {
 
     return (
       <div>
-        {range(13, 65).map(i => {
-          const card = getCard(i);
-
-          return card.rank ? (
+        {getInitialDeck().map((card, i) => {
+          return (
             <CardContainer
               index={i}
               key={card.rank + card.suit}
@@ -101,7 +85,7 @@ class DeckContainer extends Component {
               mapXYZ={stack}
               flipOnHover={flipOnHover}
             />
-          ) : null;
+          );
         })}
       </div>
     );

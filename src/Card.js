@@ -15,7 +15,7 @@ class Card extends Component {
   render() {
     const { index, card, size, faceDown, rotationY } = this.props;
 
-    return card.length === 2 ? (
+    return (
       <div id="card" style={{ transform: `rotateY(${rotationY}deg)` }}>
         <div
           className={faceDown === true ? "front" : "back"}
@@ -27,7 +27,7 @@ class Card extends Component {
           style={{ width: "100%", height: "100%" }}
         />
       </div>
-    ) : null;
+    );
   }
 }
 
