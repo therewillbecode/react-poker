@@ -22,11 +22,18 @@ class Card extends Component {
       faceDown,
       rotationY
     } = this.props;
-
+    console.log(card);
     return (
       <div id="card" style={{ transform: `rotateY(${rotationY}deg)` }}>
-        <img className={faceDown === true ? "front" : "back"} src={cardBack} />
-        <img className={faceDown === true ? "back" : "front"} src={cardFront} />
+        <div
+          className={faceDown === true ? "front" : "back"}
+          style={{ backgroundColor: "grey", width: "100%", height: "100%" }}
+        />
+        <img
+          className={faceDown === true ? "back" : "front"}
+          src={`cards/${card.toUpperCase()}.svg`}
+          style={{ width: "100%", height: "100%" }}
+        />
       </div>
     );
   }
