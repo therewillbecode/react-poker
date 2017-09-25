@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import "./Deck.css";
 import CardContainer from "./CardContainer";
 
@@ -53,7 +53,7 @@ const getInitialDeck = () =>
     .map(r => suits.map(s => ({ rank: r, suit: s })))
     .reduce((prev, curr) => prev.concat(curr));
 
-class DeckContainer extends Component {
+class DeckContainer extends PureComponent {
   constructor(props) {
     super(props);
     this.state = { board: [], deck: [] };
@@ -82,7 +82,7 @@ class DeckContainer extends Component {
               size={size}
               boardXoffset={boardXoffset} // board x offset relative to stack
               boardYoffset={boardYoffset} // board y offset relative to stack
-              mapXYZ={mapXYZ}
+              mapXYZ={stack}
               flipOnHover={flipOnHover}
             />
           );
