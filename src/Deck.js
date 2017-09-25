@@ -1,137 +1,102 @@
-import React, { PureComponent, Component } from 'react'
-import R from 'rambda'
-import './Deck.css'
-import CardContainer from './CardContainer'
-import { List, fromJS } from 'immutable'
+import React, { PureComponent } from "react";
+import "./Deck.css";
+import CardContainer from "./CardContainer";
 
-import Perf from 'react-addons-perf'; // ES6
+const range = (start, count) =>
+  Array.apply(0, Array(count)).map((element, index) => {
+    return index + start;
+  });
 
+const spreadShuffle = i => ({
+  x: Math.cos(i) * Math.floor(Math.random() * 200 + 1),
+  y: Math.sin(i) * Math.floor(Math.random() * 200 + 1),
+  z: 0
+});
 
-const spreadShuffle = i => ({ 
-  x: Math.cos(i) * Math.floor((Math.random() * 200) + 1),
-  y: Math.sin(i) * Math.floor((Math.random() * 200) + 1), 
-  z : 0
-})
+const spread = i => ({
+  x: i * 12 - 100,
+  y: 50,
+  z: 0
+});
 
-const spread = i => ({ 
-  x: (i * 12) - 100,
-  y: 50, 
-  z : 0
-})
-
-const fan = i => ({ 
+const fan = i => ({
   x: Math.cos(i) * 95 + 400,
-  y: Math.sin(i) * 95, 
-  z : i
-})
+  y: Math.sin(i) * 95,
+  z: i
+});
 
 const stack = i => ({
   x: 0.1 * i,
-  y: 0.1 * i, 
-  z : i
-})
+  y: 0.1 * i,
+  z: i
+});
 
+const suits = ["d", "c", "h", "s"];
+const ranks = [
+  "A",
+  "2",
+  "3",
+  "4",
+  "5",
+  "6",
+  "7",
+  "8",
+  "9",
+  "10",
+  "J",
+  "Q",
+  "K"
+];
 
-function convertSuit (suit) {
-  switch (suit) {
-    case 1:
-      return 'h'
-    case 2:
-      return 'd'
-    case 3:
-      return 's'
-    case 4:
-      return 'c'
+const getInitialDeck = () =>
+  ranks
+    .map(r => suits.map(s => ({ rank: r, suit: s })))
+    .reduce((prev, curr) => prev.concat(curr));
+
+class DeckContainer extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = { board: [], deck: [] };
   }
-}
-
-function convertRank (rank) {
-  if (rank === 1) return 'A'
-  if (rank < 11) return rank
-
-  switch (rank) {
-    case 11:
-      return 'J'
-    case 12:
-      return 'Q'
-    case 13:
-      return 'K'
-  }
-}
-
-const getSuit = i => convertSuit(i / 13 | 0)
-
-const getRank = i => convertRank(i % 13 + 1)
-
-const getCard = i => ({
-  suit: getSuit(i),
-  rank: getRank(i)
-})
-
-
-class Deck extends PureComponent {
-  constructor(props){
-    super(props)
-    // probs shouldnt be in state maybe use props
-    this.state = { board: [] }
-  }
-  
-  componentDidMount(){
-    setTimeout(() => this.setState({board: ['Ah', 'Ac', 'Ad'] }), 900)
-    setTimeout(() => this.setState({board: ['Ah', 'Ac', 'Ad','2d'] }), 2200)
-    setTimeout(() => this.setState({board: ['Ah', 'Ac', 'Ad','2d', '9d'] }), 3200)
-    setTimeout(() => this.setState({board: [] }), 5200)  
-}
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.board) {
-      this.setState({ board: nextProps.board })
+      this.setState({ board: nextProps.board });
     }
   }
-
-  componentWillUpdate(){
-    this.prevBoard = this.state.board  // store reference for comparison to see if shuffle needed
-  }
-
-  shouldShuffle(currBoard) {
-    if (this.prevBoard.length === 5 && currBoard.length === 0) {
-      this.shuffle()
-    }
-  
-  }
-
-  shuffle() {
-    console.log('shuffff')
-
-  }
-  
 
   render() {
-   const cardsArr = List(R.range(13, 65))
-   const size = 100
-   const { board, boardXoffset, boardYoffset } = this.state
-   
-   this.prevBoard ? this.shouldShuffle(board) : null
-   
+    const { board } = this.state;
+    const { size, flipOnHover, boardYoffset, boardXoffset } = this.props;
+
     return (
       <div>
-      {cardsArr.map(i => 
-        <CardContainer
-          index={i}
-          key={i}
-          board={board}
-          card={getCard(i)}
-          doubleBacked={true}
-          faceDown={true}
-          size={250}
-          boardXoffset={1075} // board x offset relative to stack
-          boardYoffset={600} // board y offset relative to stack
-          mapXYZ={stack}
-        />
-      )}
+        {getInitialDeck().map((card, i) => {
+          return (
+            <CardContainer
+              index={i}
+              key={card.rank + card.suit}
+              board={board}
+              card={card}
+              faceDown={true}
+              size={size}
+              boardXoffset={boardXoffset} // board x offset relative to stack
+              boardYoffset={boardYoffset} // board y offset relative to stack
+              mapXYZ={stack}
+              flipOnHover={flipOnHover}
+            />
+          );
+        })}
       </div>
-    )
+    );
   }
 }
 
-export default Deck
+DeckContainer.defaultProps = {
+  size: 200,
+  boardXoffset: 475,
+  boardYoffset: 300,
+  flipOnHover: true
+};
+
+export default DeckContainer;

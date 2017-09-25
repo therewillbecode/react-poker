@@ -19,8 +19,8 @@
   backface-visibility: hidden;
 }
 
-.container { 
+.container {
   perspective: 400px;
-  position:relative;
+  position: relative;
   z-index: 1;
 }

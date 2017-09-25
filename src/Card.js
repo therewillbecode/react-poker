@@ -1,29 +1,35 @@
-import React, { PureComponent} from 'react'
+import React, { Component } from "react";
 
-const getSrc = (card, size) => {
-  let { suit, rank } = card
-  return window.Poker.getCardData(size, suit, rank)
-}
-
-class Card extends PureComponent {
-  render () {
-    const { index, card, size, doubleBacked, faceDown, rotationY} = this.props
-    const backSrc = window.Poker.getBackData(size)
-    let src = null
-
-    if (doubleBacked) {
-      src = backSrc
-    } else {
-      src = getSrc(card, size)
+class Card extends Component {
+  shouldComponentUpdate(nextProps) {
+    if (nextProps.rotationY !== this.props.rotationY) {
+      return true;
     }
 
+    if (nextProps.size !== this.props.size) {
+      return true;
+    }
+
+    return false;
+  }
+  render() {
+    const { index, card, size, faceDown, rotationY } = this.props;
+
     return (
-      <div id='card' style={{transform: `rotateY(${rotationY}deg)`}}>
-        <img className={faceDown === true ? 'front' : 'back'} src={backSrc} />
-        <img className={faceDown === true ? 'back' : 'front'} src={src} />
+      <div id="card" style={{ transform: `rotateY(${rotationY}deg)` }}>
+        <img
+          className={faceDown === true ? "front" : "back"}
+          src={"cards/back.svg"}
+          style={{ width: "100%", height: "100%" }}
+        />
+        <img
+          className={faceDown === true ? "back" : "front"}
+          src={`cards/${card.toUpperCase()}.svg`}
+          style={{ width: "100%", height: "100%" }}
+        />
       </div>
-    )
+    );
   }
 }
 
-export default Card
+export default Card;
