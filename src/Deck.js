@@ -82,7 +82,7 @@ class DeckContainer extends Component {
               size={size}
               boardXoffset={boardXoffset} // board x offset relative to stack
               boardYoffset={boardYoffset} // board y offset relative to stack
-              mapXYZ={stack}
+              mapXYZ={mapXYZ}
               flipOnHover={flipOnHover}
             />
           );

@@ -17,9 +17,10 @@ class Card extends Component {
 
     return (
       <div id="card" style={{ transform: `rotateY(${rotationY}deg)` }}>
-        <div
+        <img
           className={faceDown === true ? "front" : "back"}
-          style={{ backgroundColor: "grey", width: "100%", height: "100%" }}
+          src={"cards/back.svg"}
+          style={{ width: "100%", height: "100%" }}
         />
         <img
           className={faceDown === true ? "back" : "front"}
