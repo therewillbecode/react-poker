@@ -35,7 +35,7 @@ const getSprings = (x, y) => ({
 class CardContainer extends PureComponent {
   constructor(props) {
     super(props);
-    this.state = { rotationY: 0, boardCard: false };
+    this.state = { rotationY: 0, boardCard: false, zIndex: 0 };
     this.flipCard = this.flipCard.bind(this);
   }
 
@@ -55,10 +55,10 @@ class CardContainer extends PureComponent {
     }
   }
 
-  componentWillUpdate({ board, card }) {
+  componentWillUpdate({ board, card, index }) {
     const cardValue = card.rank + card.suit;
-    const boardCard = board.includes(cardValue);
-    this.setState({ boardCard });
+    const boardIndex = board.indexOf(cardValue);
+    this.setState({ boardCard: boardIndex === -1, zIndex: boardIndex });
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -122,7 +122,7 @@ class CardContainer extends PureComponent {
         boardYoffset
       );
     }
-    const { rotationY, boardCard } = this.state;
+    const { rotationY, boardCard, zIndex } = this.state;
 
     const defaultStyle = getStyle(index, index, width, height); // initial coords
     const { x, y } = mapXYZ(index, card); // coords to interpolate to
@@ -134,9 +134,6 @@ class CardContainer extends PureComponent {
       // board cards never doublebacked
       doubleBacked = false;
     }
-
-    const zIndex =
-      board.indexOf(cardValue) === -1 ? 1 : board.indexOf(cardValue) + 1;
 
     return (
       <div
