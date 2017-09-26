@@ -99,8 +99,6 @@ class CardContainer extends PureComponent {
       board,
       boardXoffset,
       boardYoffset,
-      stackLeft,
-      stackTop,
       flipOnHover
     } = this.props;
     let { mapXYZ } = this.props;
