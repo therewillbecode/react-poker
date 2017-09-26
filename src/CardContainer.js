@@ -58,7 +58,7 @@ class CardContainer extends Component {
   componentWillUpdate({ board, card, index }) {
     const cardValue = card.rank + card.suit;
     const boardIndex = board.indexOf(cardValue);
-    this.setState({ boardCard: boardIndex === -1, zIndex: boardIndex });
+    this.setState({ boardCard: boardIndex === -1, zIndex: boardIndex + 1 });
   }
 
   shouldComponentUpdate(nextProps, nextState) {
