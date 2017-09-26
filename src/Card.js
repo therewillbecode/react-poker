@@ -1,6 +1,6 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 
-class Card extends Component {
+class Card extends PureComponent {
   shouldComponentUpdate(nextProps) {
     if (nextProps.rotationY !== this.props.rotationY) {
       return true;
