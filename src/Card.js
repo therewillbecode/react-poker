@@ -24,7 +24,7 @@ class Card extends PureComponent {
         />
         <img
           className={faceDown === true ? "back" : "front"}
-          src={`cards/${card.toUpperCase()}.svg`}
+          src={`cards/${card}.svg`}
           style={{ width: "100%", height: "100%" }}
         />
       </div>

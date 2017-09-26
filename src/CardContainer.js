@@ -160,7 +160,7 @@ class CardContainer extends PureComponent {
               <Card
                 size={size}
                 index={index}
-                card={card.rank + card.suit}
+                card={cardValue.toUpperCase()}
                 faceDown={this.props.faceDown}
                 doubleBacked={doubleBacked}
                 rotationY={rotationY}
