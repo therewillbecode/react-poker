@@ -101,7 +101,7 @@ class CardContainer extends PureComponent {
       boardYoffset,
       flipOnHover
     } = this.props;
-    let { mapXYZ } = this.props;
+    let { mapXYZ, doubleBacked } = this.props;
     const scale = size / size;
     const width = size * 0.75;
     const height = size;
@@ -124,7 +124,6 @@ class CardContainer extends PureComponent {
     const scaledY = y * scale;
     const sprungRange = getSprings(scaledX, scaledY);
 
-    let { doubleBacked } = this.props;
     const boardCard = board.includes(cardValue);
     if (boardCard) {
       // board cards never doublebacked
