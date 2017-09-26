@@ -108,7 +108,6 @@ class CardContainer extends PureComponent {
       board
     } = this.props;
     let { mapXYZ, doubleBacked } = this.props;
-    const scale = size / size;
     const width = size * 0.75;
     const height = size;
     const cardValue = card.rank + card.suit;
@@ -123,15 +122,11 @@ class CardContainer extends PureComponent {
       );
     }
     const { rotationY, boardCard, zIndex } = this.state;
-
     const defaultStyle = getStyle(index, index, width, height); // initial coords
     const { x, y } = mapXYZ(index, card); // coords to interpolate to
-    const scaledX = x * scale; // scale coords for card size
-    const scaledY = y * scale;
-    const sprungRange = getSprings(scaledX, scaledY);
+    const sprungRange = getSprings(x, y);
 
     if (boardCard) {
-      // board cards never doublebacked
       doubleBacked = false;
     }
 
