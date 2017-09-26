@@ -32,7 +32,7 @@ const getSprings = (x, y) => ({
   y: spring(y, springConfig)
 });
 
-class CardContainer extends PureComponent {
+class CardContainer extends Component {
   constructor(props) {
     super(props);
     this.state = { rotationY: 0, boardCard: false, zIndex: 0 };
