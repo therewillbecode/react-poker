@@ -35,7 +35,7 @@ const getSprings = (x, y) => ({
 class CardContainer extends Component {
   constructor(props) {
     super(props);
-    this.state = { rotationY: 0, boardCard: false, zIndex: 0 };
+    this.state = { rotationY: 0, boardCard: false, zIndex: 1 };
     this.flipCard = this.flipCard.bind(this);
   }
 
@@ -58,7 +58,10 @@ class CardContainer extends Component {
   componentWillUpdate({ board, card, index }) {
     const cardValue = card.rank + card.suit;
     const boardIndex = board.indexOf(cardValue);
-    this.setState({ boardCard: boardIndex !== -1, zIndex: boardIndex + 1 });
+    this.setState({
+      boardCard: boardIndex !== -1,
+      zIndex: boardIndex === -1 ? 1 : boardIndex + 1
+    });
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -66,6 +69,10 @@ class CardContainer extends Component {
     const currBoard = this.props.board;
     const card = this.props.card.rank + this.props.card.suit;
     const isNewBoardCard = this.isNewBoardCard(currBoard, nextBoard, card);
+
+    if (nextProps.size !== this.props.size) {
+      return true;
+    }
 
     if (nextState.rotationY !== this.state.rotationY) {
       return true;
