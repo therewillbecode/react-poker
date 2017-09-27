@@ -58,8 +58,6 @@ class CardContainer extends Component {
   componentWillUpdate({ board, card, index }) {
     const cardValue = card.rank + card.suit;
     const boardIndex = board.indexOf(cardValue);
-    console.log("boardIndex of " + card + " is " + boardIndex);
-    console.log("zIndex of " + card + " is " + boardIndex + 1);
     this.setState({ boardCard: boardIndex !== -1, zIndex: boardIndex + 1 });
   }
 
