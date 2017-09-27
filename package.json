@@ -1,6 +1,6 @@
 {
   "name": "react-poker",
-  "version": "0.0.7",
+  "version": "0.0.71",
   "description": "React component for dealing cards",
   "main": "dist/react-poker.js",
   "scripts": {
