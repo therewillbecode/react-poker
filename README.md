@@ -1,4 +1,4 @@
-# flurry
+# Flurry
 A High Level React Library For Playing Card Animations
 
 [Click here for a demo](http://therewillbecode.github.io/react-poker)
