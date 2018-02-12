@@ -1,5 +1,5 @@
-# react-poker
-A react component for dealing a poker card game
+# flurry
+A High Level React Library For Playing Card Animations
 
 [Click here for a demo](http://therewillbecode.github.io/react-poker)
 
