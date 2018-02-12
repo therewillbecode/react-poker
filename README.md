@@ -148,3 +148,12 @@ A new board prop is passed to the Deck component everytime a new card(s) is draw
     }
 
     export default AppContainer;
+    
+    
+   TODO 
+    Generalise library for any card game - i.e Pokemon, Magic The Gathering
+    Add a Pokemon demo.
+    Make the API more declarative:
+      - Pass functions for determining spring settings and card positioning
+      - Permit Custom Card Images
+    Design more attractive set of custom poker cards
