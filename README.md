@@ -149,7 +149,7 @@ A new board prop is passed to the Deck component everytime a new card(s) is draw
 
     export default AppContainer;
     
-    **TODO**
+**TODO**
     
 - Generalise library for any card game - i.e Pokemon, Magic The Gathering
 - Demos
