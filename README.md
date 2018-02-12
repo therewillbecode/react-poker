@@ -154,6 +154,8 @@ A new board prop is passed to the Deck component everytime a new card(s) is draw
     Generalise library for any card game - i.e Pokemon, Magic The Gathering
     Add a Pokemon demo.
     Make the API more declarative:
-      - Pass functions for determining spring settings and card positioning
+      - Pass functions for determining spring settings and card positioning/animation
+      - Abstract out functions for different events i.e flop, turn river that define animations (essentially removing the "poker" related assumptions about the game. 
       - Permit Custom Card Images
     Design more attractive set of custom poker cards
+    For the poker demo add a player deal event
