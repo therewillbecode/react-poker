@@ -41,7 +41,6 @@
   },
   "homepage": "http://therewillbecode.github.io/react-poker",
   "dependencies": {
-    "dev": "^0.1.3",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-motion": "^0.5.1"
